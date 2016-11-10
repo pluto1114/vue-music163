@@ -20,10 +20,14 @@ const router = new VueRouter({
   ]
 })
 
-new Vue({
+var vm=new Vue({
   el: '#app',
   template: '<App/>',
   components: { App },
   router
+})
+
+vm.$on('input',function(val){
+  alert(0)
 })
 

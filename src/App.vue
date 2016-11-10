@@ -1,13 +1,10 @@
 <template>
   <div id="app">
-    <mt-header fixed title="固定在顶部"></mt-header>
-    <div class="logo">
     <mt-search
       v-model="value"
       cancel-text="取消"
       placeholder="搜索">
     </mt-search>
-  </div>
     <ul>
       <li><router-link to="/">/</router-link></li>
       <li><router-link to="/foo">/foo</router-link></li>
@@ -23,7 +20,7 @@ import Hello from './components/Hello'
 export default {
   name: 'app',
   data:function(){
-    return {value:'mk'}
+    return {value:'mk',active:"tab-container1"}
   },
   components: {
     Hello
