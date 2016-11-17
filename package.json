@@ -12,6 +12,7 @@
     "fetch-jsonp": "^1.0.2",
     "mint-ui": "^2.0.4",
     "vue": "^2.0.1",
+    "vue-resource": "^1.0.3",
     "vue-router": "^2.0.1"
   },
   "devDependencies": {

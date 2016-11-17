@@ -13,7 +13,7 @@ var port = process.env.PORT || config.dev.port
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
 var proxyTable = config.dev.proxyTable
-
+console.log("proxy:"+JSON.stringify(proxyTable))
 var app = express()
 var compiler = webpack(webpackConfig)
 

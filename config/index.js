@@ -21,12 +21,26 @@ module.exports = {
     port: 8080,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    //proxyTable: {},
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
-    cssSourceMap: false
+    cssSourceMap: false,
+    proxyTable: {
+        '/api':{
+            target:'http://music.163.com/api',
+            changeOrigin:true,
+            pathRewrite:{
+                '^/api':''
+            },
+            headers:{
+                'Referer': 'http://music.163.com/search/',
+                'Content-Type':'application/x-www-form-urlencoded'
+            }
+        }
+    }
   }
+  
 }
