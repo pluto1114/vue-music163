@@ -37,6 +37,28 @@ DataApiPlugin.install = function (Vue, options) {
         console.log("Fetch错误:"+err);
     });
   }
+  Vue.prototype.$showSong = function (options,callback) {
+    var otherParams ={
+        'csrf_token': "",
+        'type':1,
+        'offset':0,
+        'limit':10,
+        'total':true
+    };
+
+    var postData = Object.assign(options, otherParams);
+    console.log(postData);
+     
+    fetch("/api/song/detail",{method:'POST',body:querystring.stringify(postData)})
+    .then(status)
+    .then(json)
+    .then(function(data){
+        return callback(data);
+    })
+    .catch(function(err){
+        console.log("Fetch错误:"+err);
+    });
+  }
   
 }
 module.exports = DataApiPlugin

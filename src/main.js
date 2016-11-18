@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
 import Songs from './components/Songs'
+import Song from './components/Song'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import VueResource from 'vue-resource'
@@ -21,7 +22,8 @@ const router = new VueRouter({
   base: __dirname,
   routes: [
     { path: '/', component: Home },
-    { path: '/songs/:id', component: Songs },
+    { path: '/songs/:word', component: Songs },
+    { path: '/song/:id', component: Song },
     { path: '/foo', component: Foo },
     { path: '/bar', component: Bar }
   ]
