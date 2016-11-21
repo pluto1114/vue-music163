@@ -1,8 +1,8 @@
 <template>
   <div class="songs">
   	<div class="loading" v-if="loading">Loading...</div>
-  	<transition-group name="slide">
-  	<mt-cell v-if="songs" :title="x.name" :label="x.artists[0].name" is-link :to="'/song/'+x.id" v-for="x in songs" :key="x.id" class="content">
+  	<transition-group name="slide-fade">
+  	<mt-cell v-if="show" :title="x.name" :label="x.artists[0].name" is-link :to="'/song/'+x.id" v-for="x in songs" :key="x.id">
   		<span>来自专辑《{{x.album.name}}》</span>
   	</mt-cell>
     
@@ -15,6 +15,7 @@ export default {
   name: 'songs',
   data () {
     return {
+      show: false,
       loading: true,
       songs:null
     }
@@ -32,6 +33,7 @@ export default {
 	  	this.$searchSong({s:word},data=>{
 	      this.songs=data.result.songs;
 	      this.loading=false;
+        this.show=true;
 	    });
   	}
   }
@@ -48,15 +50,5 @@ export default {
 .error {
   color: red;
 }
-.content {
-  transition: all .35s ease;
-}
-.slide-enter {
-  opacity: 0;
-  transform: translate(30px, 0);
-}
-.slide-leave-active {
-  opacity: 0;
-  transform: translate(-30px, 0);
-}
+
 </style>

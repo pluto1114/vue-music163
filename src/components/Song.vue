@@ -1,16 +1,26 @@
 <template>
-  <div v-if="song" class="song">
-  	<div class="song-pic" :style="{backgroundImage:'url('+song.album.picUrl+')'}">
+	<transition name="slide-fade">
+	<div class="song">
+	  	<div v-if="song" class="song-pic" :style="{backgroundImage:'url('+song.album.picUrl+')'}">
+		</div>
+		
+		<div  v-if="show" class="card ">
+			<h3>{{song.name}}</h3>
+			<div class="t-gra">歌手：<span class="t-blu">{{song.artists[0].name}}</span></div>
+			<div class="t-gra">所属专辑：<span class="t-blu">{{song.album.name}}</span></div>
+			<div class="btn-controls">
+				<div class="btn-con" @click="handlePlay">
+	          		<mt-button type="primary">播放</mt-button>
+	      		</div>
+	      		<div class="btn-con" @click="handlePause">
+	          		<mt-button type="primary">暂停</mt-button>
+	      		</div>
+	      	</div>
+	      	<audio id="media" :src="song.mp3Url" controls></audio> 
+		</div>
+		
 	</div>
-	<div class="card">
-		<h3>{{song.name}}</h3>
-		<div class="t-gra">歌手：<span class="t-blu">{{song.artists[0].name}}</span></div>
-		<div class="t-gra">所属专辑：<span class="t-blu">{{song.album.name}}</span></div>
-		<div class="btn-play" @click="handleClick">
-          <mt-button type="primary">播 放</mt-button>
-      	</div>
-	</div>
-  </div>
+	</transition>
 </template>
 
 <script>
@@ -19,19 +29,23 @@ export default {
   data () {
     return {
       id:(this.$route.params.id || '307525'),
+      show:false,
       song:null
     }
   },
   created(){
-  	console.log("created")
   	this.$showSong({music_id:this.id},data=>{
-  		console.log(data)
+  		console.log(data);
   		this.song=data.songs[0];
+  		this.show=true;
   	})
   },
   methods:{
-  	handleClick:()=>{
-
+  	handlePlay(){
+  		document.getElementById("media").play();
+  	},
+  	handlePause(){
+  		document.getElementById("media").pause();
   	}
   }
 }
@@ -55,12 +69,16 @@ export default {
 .card{
 	box-shadow:inset 0 0 10px #269;  
 	margin:0 1em;
-	height:10em;
+	height:15em;
 	padding: 0.625em 1.2em;
 	line-height: 1.5em;
 }
-.btn-play{
-	padding: 0.6em 0;
+.btn-controls{
+	padding: 1em 0 2em 0;
+	display: flex;
+}
+.btn-con{
+	margin-right: 0.825em;
 }
 .t-gra{
 	color: #999;
