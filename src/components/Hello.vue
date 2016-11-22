@@ -1,31 +1,24 @@
 <template>
-  <div class="hello">
+  <transition name="slide-up" v-on:after-leave="afterLeave">
+  <div v-show="show" class="hello neonText">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <h2>网易云音乐</h2>
   </div>
+  </transition>
 </template>
 
 <script>
 export default {
   name: 'hello',
+  props:['show'],
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: '拥抱Vue，享受生活'
+    }
+  },
+  methods:{
+    afterLeave(){
+      this.$emit("afterLeave");
     }
   }
 }
@@ -33,21 +26,32 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
+.hello{
+  text-align: center;
+  padding-top: 6em;
+  padding-bottom: 5em;
+  overflow: hidden;
+  line-height: 2em;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+h1 {
+  color: #fff;
+  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1),0 1px 3px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2),0 5px 10px rgba(0,0,0,0.25);
+}
+.neonText h2 {
+  color: #fff;
+  text-shadow:0 0 5px #CCCCCC, 0 0 10px #CCCCCC, 0 0 15px #CCCCCC, 0 0 20px #095816, 0 0 25px #095816, 0 0 30px #095816, 0 0 50px #095816, 0 0 80px #095816, 0 0 100px #095816, 0 0 150px #095816
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
+.slide-up-enter-active {
+  transition: all .5s ease;
 }
-
-a {
-  color: #42b983;
+.slide-up-leave-active {
+  transition: all .8s ease;
+}
+.slide-up-enter, .slide-up-leave-active {
+  opacity: 0;
+  padding:0;
+  height: 0;
 }
 </style>

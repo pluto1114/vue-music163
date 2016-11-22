@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { Indicator } from 'mint-ui';
+
 export default {
   name: 'song',
   data () {
@@ -34,9 +36,11 @@ export default {
     }
   },
   created(){
+  	Indicator.open('加载中...');
   	this.$showSong({music_id:this.id},data=>{
-  		console.log(data);
+  		console.log(data);	
   		this.song=data.songs[0];
+  		Indicator.close();
   		this.show=true;
   	})
   },

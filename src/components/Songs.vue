@@ -1,16 +1,17 @@
 <template>
   <div class="songs">
-  	<div class="loading" v-if="loading">Loading...</div>
+  	
   	<transition-group name="slide-fade">
-  	<mt-cell v-if="show" :title="x.name" :label="x.artists[0].name" is-link :to="'/song/'+x.id" v-for="x in songs" :key="x.id">
+  	<mt-cell v-if="show" :title="x.name" :label="x.artists[0].name" :to="'/song/'+x.id" v-for="x in songs" :key="x.id">
   		<span>来自专辑《{{x.album.name}}》</span>
   	</mt-cell>
     
 	</transition-group>
-  </div>abc:{{ $route.params.word }}
+  </div>
 </template>
 
 <script>
+import { Indicator } from 'mint-ui';
 export default {
   name: 'songs',
   data () {
@@ -28,12 +29,13 @@ export default {
   },
   methods:{
   	fetchData(){
+  		Indicator.open('加载中...');
 		let word=this.$route.params.word || '汪峰';
 	  	console.log(word)
 	  	this.$searchSong({s:word},data=>{
 	      this.songs=data.result.songs;
-	      this.loading=false;
-        this.show=true;
+	      Indicator.close();
+          this.show=true;
 	    });
   	}
   }
@@ -43,9 +45,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .loading {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  
 }
 .error {
   color: red;
