@@ -3,7 +3,7 @@
   	
   	<transition-group name="slide-fade">
   	<mt-cell v-if="show" :title="x.name" :label="x.artists[0].name" :to="'/song/'+x.id" v-for="x in songs" :key="x.id">
-  		<span>来自专辑《{{x.album.name}}》</span>
+  		<span>专辑《{{x.album.name}}》</span>
   	</mt-cell>
     
 	</transition-group>

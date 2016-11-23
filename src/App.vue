@@ -68,13 +68,16 @@ export default {
 }
 
 .mint-cell-title{
-  padding-left:1.2em;
+  min-width: 6em;
+}
+.mint-cell-value{
+  
 }
 .my-controls{
   width: 95%;
   position: fixed;
   left: 0;
-  bottom: 5px;
+  bottom: 2em;
   padding:0 .8em;
 }
 
