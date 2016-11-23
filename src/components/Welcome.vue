@@ -1,6 +1,6 @@
 <template>
   <transition name="slide-up" v-on:after-leave="afterLeave">
-  <div v-show="show" class="hello neonText">
+  <div v-show="show" class="welcome neonText">
     <h1>{{ msg }}</h1>
     <h2>网易云音乐</h2>
   </div>
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'hello',
+  name: 'welcome',
   props:['show'],
   data () {
     return {
@@ -26,10 +26,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.hello{
+.welcome{
   text-align: center;
-  padding-top: 6em;
-  padding-bottom: 5em;
+  height:15em;
   overflow: hidden;
   line-height: 2em;
 }
@@ -51,7 +50,6 @@ h1 {
 }
 .slide-up-enter, .slide-up-leave-active {
   opacity: 0;
-  padding:0;
   height: 0;
 }
 </style>

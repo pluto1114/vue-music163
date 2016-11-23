@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     
-    <hello :show="showHello" @afterLeave="toSongs"></hello>
+    <welcome :show="showWelcome" @afterLeave="toSongs"></welcome>
  
     <div style="display:flex;">
       <div style="flex:1;">
@@ -13,6 +13,8 @@
     </div>   
     
     <router-view class="view"></router-view>
+    <controls class="my-controls"></controls>
+    
 
 
     
@@ -20,24 +22,33 @@
 </template>
 
 <script>
-import Hello from './components/Hello'
-
+import Welcome from './components/Welcome'
+import Controls from './components/Controls'
+import { Toast } from 'mint-ui';
 export default {
   name: 'app',
   data:function(){
-    return {value:'',showHello:true}
+    return {
+      value:'',
+      showWelcome:true
+    }
   },
   components: {
-    Hello
+    Welcome,
+    Controls
   },
   methods:{
     handleClick(){
-      console.log("click:"+this.value)
-      if(!this.showHello){
-        this.toSongs();
+      console.log("click:"+this.value);
+      if (this.value=='') {
+        Toast('搜索关键字不可为空');
+        return;
       }
-      //this.$router.push({ path: '/songs/'+this.value})
-      this.showHello=false;
+      if(!this.showWelcome){
+        this.toSongs();
+      }else{
+        this.showWelcome=false;
+      }
     },
     toSongs(){
       this.$router.push({ path: '/songs/'+this.value})
@@ -47,16 +58,7 @@ export default {
 </script>
 
 <style>
-@media (min-width: 1024px) {
-    #app {
-        width:500px;
-        min-height:640px;
-        padding:10px;
-        border:1px solid #ccc;
-        border-radius: 0.3em;
-        margin:0 auto;
-    }
-}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -64,10 +66,17 @@ export default {
   color: #2c3e50;
   
 }
+
 .mint-cell-title{
   padding-left:1.2em;
 }
-
+.my-controls{
+  width: 95%;
+  position: fixed;
+  left: 0;
+  bottom: 5px;
+  padding:0 .8em;
+}
 
 .slide-fade-enter-active {
   transition: all .5s ease;
@@ -78,5 +87,19 @@ export default {
 .slide-fade-enter, .slide-fade-leave-active {
   padding-left: 10px;
   opacity: 0;
+}
+
+@media (min-width: 1024px) {
+    #app {
+        width:480px;
+        min-height:800px;
+        padding:10px;
+        border:1px solid #ccc;
+        border-radius: 0.3em;
+        margin:0 auto;
+    }
+    .my-controls{
+        
+    }
 }
 </style>

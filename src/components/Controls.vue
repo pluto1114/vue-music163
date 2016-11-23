@@ -1,6 +1,6 @@
 <template>
 	<transition name="slide-fade">
-	<div class="controls">
+	<div v-show="show" class="controls">
 	     <audio id="media" :src="mp3Url" controls></audio> 
 	</div>
 	</transition>
@@ -12,11 +12,19 @@ export default {
   name: 'controls',
   data () {
     return {
-      mp3Url:''
+    	show:false,
+      	mp3Url:''
     }
   },
   created(){
-  	
+  	this.$root.$on('play',(mp3Url)=>{
+  		this.show=true;
+  		document.getElementById("media").src=mp3Url;
+  		document.getElementById("media").play();
+  	});
+  	this.$root.$on('pause',()=>{
+  		document.getElementById("media").pause();
+  	});
   }
 }
 </script>
@@ -26,5 +34,7 @@ export default {
 .controls{
 	
 }
-
+audio{
+	width: 100%;
+}
 </style>

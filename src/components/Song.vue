@@ -1,22 +1,23 @@
 <template>
 	<transition name="slide-fade">
-	<div class="song">
-	  	<div v-if="song" class="song-pic" :style="{backgroundImage:'url('+song.album.picUrl+')'}">
-		</div>
-		
-		<div  v-if="show" class="card ">
-			<h3>{{song.name}}</h3>
-			<div class="t-gra">歌手：<span class="t-blu">{{song.artists[0].name}}</span></div>
-			<div class="t-gra">所属专辑：<span class="t-blu">{{song.album.name}}</span></div>
-			<div class="btn-controls">
-				<div class="btn-con" @click="handlePlay">
-	          		<mt-button type="primary">播放</mt-button>
-	      		</div>
-	      		<div class="btn-con" @click="handlePause">
-	          		<mt-button type="primary">暂停</mt-button>
-	      		</div>
+	<div class="song">	
+		<div  v-if="show" class="card " style="display:flex;">
+			<div class="song-pic" :style="{backgroundImage:'url('+song.album.picUrl+')'}">
+			</div>
+			<div style="flex:1;">
+				<h3>{{song.name}}</h3>
+				<div class="t-gra">歌手：<span class="t-blu">{{song.artists[0].name}}</span></div>
+				<div class="t-gra">所属专辑：<span class="t-blu">{{song.album.name}}</span></div>
+				<div class="btn-controls">
+					<div class="btn-con" @click="handlePlay">
+		          		<mt-button type="primary">播放</mt-button>
+		      		</div>
+		      		<div class="btn-con" @click="handlePause">
+		          		<mt-button type="primary">暂停</mt-button>
+		      		</div>
+		      	</div>
 	      	</div>
-	      	<audio id="media" :src="song.mp3Url" controls></audio> 
+	      	<!-- <audio id="media" :src="song.mp3Url" controls></audio>  -->
 		</div>
 		
 	</div>
@@ -46,7 +47,8 @@ export default {
   },
   methods:{
   	handlePlay(){
-  		document.getElementById("media").play();
+  		// document.getElementById("media").play();
+  		this.$root.$emit("play",this.song.mp3Url);
   	},
   	handlePause(){
   		document.getElementById("media").pause();
@@ -62,18 +64,16 @@ export default {
 }
 .song-pic{
 	
-	min-height:15em;
-	max-height:35em;
-	margin:0.6em 0.875em;
-	text-align: center;
+	width:6em;
+	margin: 1.5em 1em 0 0.25em;
 	background-repeat:no-repeat;
    	background-size:contain;
-	background-position: center;
+	background-position: top;
 }
 .card{
 	box-shadow:inset 0 0 10px #269;  
-	margin:0 1em;
-	height:15em;
+	margin:0 0.4em;
+	height:12em;
 	padding: 0.625em 1.2em;
 	line-height: 1.5em;
 }

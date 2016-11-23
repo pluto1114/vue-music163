@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import App from './App'
 import Songs from './components/Songs'
 import Song from './components/Song'
-//import Controls from './components/Controls'
+import Controls from './components/Controls'
 import MintUI from 'mint-ui'
 import { Button, Cell ,Field} from 'mint-ui';
 import 'mint-ui/lib/style.css'
