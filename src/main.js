@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import App from './App'
 import Songs from './components/Songs'
 import Song from './components/Song'
-import Controls from './components/Controls'
 import MintUI from 'mint-ui'
 import { Button, Cell ,Field} from 'mint-ui';
 import 'mint-ui/lib/style.css'
@@ -18,9 +17,6 @@ Vue.use(MintUI)
 Vue.use(VueResource)
 Vue.use(DataApi)
 
-const Home = { template: '<div>home</div>' }
-const Foo = { template: '<div>foo</div>' }
-const Bar = { template: '<div>bar</div>' }
 
 
 const router = new VueRouter({
@@ -30,8 +26,6 @@ const router = new VueRouter({
     { path: '/' },
     { path: '/songs/:word', component: Songs },
     { path: '/song/:id', component:Song },   
-    { path: '/foo', component: Foo },
-    { path: '/bar', component: Bar }
   ]
 })
 

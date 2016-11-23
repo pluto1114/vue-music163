@@ -1,6 +1,16 @@
-# music163
+# vue-music163
 
-> A Vue.js project
+> A Vue.js project for music
+### Use
+* vuejs-2.0
+* vue-router
+* mint-ui
+* vue-cli
+
+## Support
+* Chrome
+* Firefox
+* Mobile browser
 
 ## Build Setup
 
