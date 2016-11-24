@@ -3,6 +3,7 @@ var querystring = require('querystring');
 
 var DataApiPlugin={};
 
+
 DataApiPlugin.install = function (Vue, options) {
   function status(response){
       if(response.status>=200 && response.status<300){
@@ -15,6 +16,8 @@ DataApiPlugin.install = function (Vue, options) {
   function json(response){
       return response.json();
   }
+  
+  Vue.http.options.emulateJSON = true;
   Vue.prototype.$searchSong = function (options,callback) {
     var otherParams ={
         'csrf_token': "",
@@ -27,25 +30,20 @@ DataApiPlugin.install = function (Vue, options) {
     var postData = Object.assign(options, otherParams);
     console.log(postData);
      
-    fetch("/api/search/get/web",{method:'POST',body:querystring.stringify(postData)})
-    .then(status)
-    .then(json)
-    .then(function(data){
-        return callback(data);
-    })
-    .catch(function(err){
-        console.log("Fetch错误:"+err);
+    Vue.http.post("/api/search/get/web",postData).then(resp=>{
+      console.log(resp.data);
+      callback(resp.data);
+    },resp=>{
+      console.log("请求出错");
     });
   }
   Vue.prototype.$showSong = function (options,callback) {
-    fetch("/api/song/detail?id="+options.music_id+"&ids="+'%5B'+options.music_id+'%5D')
-    .then(status)
-    .then(json)
-    .then(function(data){
-        return callback(data);
-    })
-    .catch(function(err){
-        console.log("Fetch错误:"+err);
+   
+    Vue.http.get("/api/song/detail?id="+options.music_id+"&ids="+'%5B'+options.music_id+'%5D').then(resp=>{
+      console.log(resp.data);
+      callback(resp.data);
+    },resp=>{
+      console.log("请求出错");
     });
   }
   
