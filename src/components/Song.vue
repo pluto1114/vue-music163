@@ -1,10 +1,10 @@
 <template>
 	<transition name="slide-fade">
 	<div class="song">	
-		<div  v-if="show" class="card " style="display:flex;">
+		<div  v-if="show" class="card container-flex">
 			<div class="song-pic" :style="{backgroundImage:'url('+song.album.picUrl+')'}">
 			</div>
-			<div style="flex:1;">
+			<div class="f1">
 				<h3>{{song.name}}</h3>
 				<div class="t-gra">歌手：<span class="t-blu">{{song.artists[0].name}}</span></div>
 				<div class="t-gra">所属专辑：<span class="t-blu">{{song.album.name}}</span></div>
