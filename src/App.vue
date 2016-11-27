@@ -3,15 +3,21 @@
     
     <welcome :show="showWelcome" @afterLeave="toSongs"></welcome>
  
-    <div style="display:flex;">
-      <div style="flex:1;">
+    <div class="container-flex">
+      <div class="f1">
         <mt-field v-model="value" placeholder="输入歌曲名称或歌手姓名"></mt-field>
       </div>
-      <div style="margin-left:20px;" @click="handleClick">
+      <div style="margin-left:20px;" @click="handleSearch">
           <mt-button type="primary">搜索</mt-button>
       </div>
     </div>   
-    
+    <div class="my-badges">
+      <transition-group name="list">
+        <mt-badge type="primary" size="large" v-for="word of searchWordArr" :key="word">
+          <span @click="handleWord(word)">{{word}}</span>
+        </mt-badge>
+    </transition-group>
+    </div>
     <router-view class="view"></router-view>
     <controls class="my-controls"></controls>
     
@@ -28,9 +34,16 @@ import { Toast } from 'mint-ui';
 export default {
   name: 'app',
   data:function(){
+    // init searchWordArr
+    var searchWordArr=[];
+    if (localStorage.searchWords) {
+      searchWordArr=JSON.parse(localStorage.searchWords);
+    }
+    console.log("searchWordArr:"+searchWordArr);
     return {
       value:'',
-      showWelcome:true
+      showWelcome:true,
+      searchWordArr:searchWordArr
     }
   },
   components: {
@@ -38,7 +51,7 @@ export default {
     Controls
   },
   methods:{
-    handleClick(){
+    handleSearch(){
       console.log("click:"+this.value);
       if (this.value=='') {
         Toast('搜索关键字不可为空');
@@ -50,8 +63,23 @@ export default {
         this.showWelcome=false;
       }
     },
+    handleWord(word){
+      this.value=word;
+      this.handleSearch();
+    },
     toSongs(){
-      this.$router.push({ path: '/songs/'+this.value})
+      this.$router.push({ path: '/songs/'+this.value});
+
+      //update searchWords
+      if(this.searchWordArr.indexOf(this.value)<0){
+        this.searchWordArr.unshift(this.value);
+      }
+      if(this.searchWordArr.length>5){
+        this.searchWordArr=this.searchWordArr.slice(0,5);
+      }
+      
+      localStorage.searchWords=JSON.stringify(this.searchWordArr);
+      
     }
   }
 }
@@ -69,12 +97,26 @@ export default {
 a{
   text-decoration:none; 
 }
+.container-flex{
+    display:-webkit-flex;
+    display:-moz-flex;
+    display:flex;
+    display:-ms-flexbox;
+}
+.f1{
+  flex: 1;
+}
+.my-badges{
+  margin:0.5em 0 0.8em 0;
+  overflow: hidden;
+}
+.mint-badge{
+  margin:0 0.2em;
+}
 .mint-cell-title{
   min-width: 6em;
 }
-.mint-cell-value{
-  
-}
+
 .my-controls{
   width: 95%;
   position: fixed;
@@ -92,6 +134,15 @@ a{
 .slide-fade-enter, .slide-fade-leave-active {
   padding-left: 10px;
   opacity: 0;
+}
+
+
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-active {
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 @media (min-width: 1024px) {
