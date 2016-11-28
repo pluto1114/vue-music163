@@ -6,11 +6,16 @@
 * vue-router
 * mint-ui
 * vue-cli
+* appcan(package for app)
 
 ## Support
 * Chrome
 * Firefox
 * Mobile browser
+
+## Package for app
+* Appcan
+
 
 ## Build Setup
 
