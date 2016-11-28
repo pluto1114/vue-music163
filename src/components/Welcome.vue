@@ -49,7 +49,6 @@ h1 {
   transition: all .8s ease;
 }
 .slide-up-enter, .slide-up-leave-active {
-  opacity: 0;
-  height: 0;
+  transform:scale(0,0);
 }
 </style>
