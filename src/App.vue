@@ -98,13 +98,17 @@ a{
   text-decoration:none; 
 }
 .container-flex{
-    display:-webkit-flex;
-    display:-moz-flex;
-    display:flex;
-    display:-ms-flexbox;
+  display: -webkit-box !important;
+  display: box !important;
+  position:relative;
+  margin: 2px 4px;  
 }
 .f1{
-  flex: 1;
+  position:relative;
+  box-flex: 1;
+  -webkit-box-flex: 1; 
+  
+
 }
 .my-badges{
   margin:0.5em 0 0.8em 0;
