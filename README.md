@@ -29,3 +29,5 @@ npm run build
 
 - Tencent QQ: 342878509
 - E-mail: xiongmao1114@163.com
+- Git@OSC: http://git.oschina.net/xiongmao1114/vue-music163
+- Github: https://github.com/pluto1114/vue-music163
