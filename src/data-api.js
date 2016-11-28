@@ -5,7 +5,7 @@ var DataApiPlugin={};
 
 
 DataApiPlugin.install = function (Vue, options) {
- 
+
   Vue.http.options.emulateJSON = true;
   Vue.prototype.$searchSong = function (options,callback) {
     var otherParams ={
