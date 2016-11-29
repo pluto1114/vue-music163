@@ -74,7 +74,7 @@ export default {
 	box-shadow:inset 0 0 10px #269;  
 	margin:0 0.4em;
 	height:12em;
-	padding: 0.625em 1.2em;
+	padding: 0.625em 1em;
 	line-height: 1.5em;
 }
 .btn-controls{
