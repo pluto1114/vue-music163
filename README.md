@@ -6,7 +6,6 @@
 * vue-router
 * mint-ui
 * vue-cli
-* appcan(package for app)
 
 ## Support
 * Chrome
@@ -15,6 +14,7 @@
 
 ## Package for app
 * Appcan
+* Apicloud
 
 
 ## Build Setup
