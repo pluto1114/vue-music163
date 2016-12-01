@@ -16,14 +16,22 @@ export default {
       	mp3Url:''
     }
   },
-  created(){
+  mounted(){
+  	var media=document.getElementById("media");
+  	var pos=0;
   	this.$root.$on('play',(mp3Url)=>{
-  		this.show=true;
-  		document.getElementById("media").src=mp3Url;
-  		document.getElementById("media").play();
+  		this.show=true;				
+  		media.src=mp3Url;
+  		if (pos>0 && localStorage.lastUrl==mp3Url) {
+  			media.currentTime=pos;
+  		}
+  		localStorage.lastUrl=mp3Url;
+  		media.play();
   	});
   	this.$root.$on('pause',()=>{
-  		document.getElementById("media").pause();
+  		media.pause();
+  		pos=media.currentTime;
+  		media.currentTime=0;
   	});
   }
 }

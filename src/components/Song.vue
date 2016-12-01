@@ -47,11 +47,10 @@ export default {
   },
   methods:{
   	handlePlay(){
-  		// document.getElementById("media").play();
   		this.$root.$emit("play",this.song.mp3Url);
   	},
   	handlePause(){
-  		document.getElementById("media").pause();
+  		this.$root.$emit("pause");
   	}
   }
 }
