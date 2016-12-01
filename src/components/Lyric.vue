@@ -1,8 +1,8 @@
 <template>
 	<transition name="slide-fade">
-	<div class="lyric" v-show="show">	
-		<ul>
-			<li v-for="x of lrcArr">{{x}}</li>
+	<div class="lyric">	
+		<ul v-show="show">
+			<li v-for="x of lrcArr">{{x.lrc}}</li>
 		</ul>
 		
 	</div>
@@ -17,15 +17,30 @@ export default {
   data () {
     return {
       show:false,
-      lrcArr:null
+      lrcArr:[],
     }
   },
-  created(){
+  mounted(){
+
   	this.$showLyric({music_id:this.id},data=>{
-  		this.lrcArr=data.lrc.lyric.replace(new RegExp(/(\.\d{2,3})/g),'').split('\n');
-  		console.log(this.lrcArr)
-  		this.show=true;
+      this.show=true;
+      let arr=data.lrc.lyric.split('\n');
+      for(const item of arr){
+        //console.log(item)
+        let lrcObj={};
+        let timeStr=item.match("\\[(.+?)\\]")[1];
+        let timeArr=timeStr.split(":");
+        let time=parseInt(timeArr[0])*60+parseInt(timeArr[1]);
+        lrcObj.time=time;
+        lrcObj.lrc=item.replace(new RegExp(/(\.\d{2,3})/g),'');
+        this.lrcArr.push(lrcObj);
+      }
+     		
   	});
+    this.$root.$on("tick",cur=>{
+      console.log(cur);
+
+    })
   },
   methods:{
   	

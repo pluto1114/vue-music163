@@ -27,6 +27,9 @@ export default {
   		}
   		localStorage.lastUrl=mp3Url;
   		media.play();
+      setInterval(()=>{
+        this.$root.$emit("tick",media.currentTime);
+      }, 250);
   	});
   	this.$root.$on('pause',()=>{
   		media.pause();
