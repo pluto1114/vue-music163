@@ -111,11 +111,11 @@ a{
 
 }
 .my-badges{
-  margin:0.5em 0 0.8em 0;
+  margin:0.4em 0 0.8em 0;
   overflow: hidden;
 }
 .mint-badge{
-  margin:0 0.2em;
+  margin:0.1em 0.2em;
 }
 .mint-cell-title{
   min-width: 6em;
@@ -125,7 +125,7 @@ a{
   width: 95%;
   position: fixed;
   left: 0;
-  bottom: 2em;
+  bottom: 1em;
   padding:0 .8em;
 }
 

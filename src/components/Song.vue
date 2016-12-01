@@ -8,7 +8,7 @@
 				<h3>{{song.name}}</h3>
 				<div class="t-gra">歌手：<span class="t-blu">{{song.artists[0].name}}</span></div>
 				<div class="t-gra">所属专辑：<span class="t-blu">{{song.album.name}}</span></div>
-				<div class="btn-controls">
+				<div class="btn-controls container-flex">
 					<div class="btn-con" @click="handlePlay">
 		          		<mt-button type="primary">播放</mt-button>
 		      		</div>
@@ -19,31 +19,32 @@
 	      	</div>
 	      	<!-- <audio id="media" :src="song.mp3Url" controls></audio>  -->
 		</div>
-		
+		<Lyric :id="id"></Lyric>
 	</div>
 	</transition>
 </template>
 
 <script>
 import { Indicator } from 'mint-ui';
-
+import Lyric from './Lyric';
 export default {
   name: 'song',
   data () {
     return {
       id:(this.$route.params.id || '307525'),
       show:false,
-      song:null
+      song:null,
+      lrcArr:null
     }
   },
   created(){
   	Indicator.open('加载中...');
   	this.$showSong({music_id:this.id},data=>{
-  		console.log(data);	
   		this.song=data.songs[0];
   		Indicator.close();
   		this.show=true;
-  	})
+  	});
+  	
   },
   methods:{
   	handlePlay(){
@@ -52,7 +53,8 @@ export default {
   	handlePause(){
   		this.$root.$emit("pause");
   	}
-  }
+  },
+  components:{Lyric}
 }
 </script>
 
@@ -78,7 +80,6 @@ export default {
 }
 .btn-controls{
 	padding: 1em 0 2em 0;
-	display: flex;
 }
 .btn-con{
 	margin-right: 0.825em;
