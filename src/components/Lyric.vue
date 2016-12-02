@@ -2,7 +2,7 @@
 	<transition name="slide-fade">
 	<div class="lyric">	
 		<ul v-show="show">
-			<li v-for="x of lrcArr">{{x.lrc}}</li>
+			<li v-for="x of lrcArr" :class="x.selected?selectedColor:defaultColor">{{x.lrc}}</li>
 		</ul>
 		
 	</div>
@@ -18,6 +18,9 @@ export default {
     return {
       show:false,
       lrcArr:[],
+      curIndex:0,
+      defaultColor:'t-gra',
+      selectedColor:'t-blu'
     }
   },
   mounted(){
@@ -25,25 +28,49 @@ export default {
   	this.$showLyric({music_id:this.id},data=>{
       this.show=true;
       let arr=data.lrc.lyric.split('\n');
-      for(const item of arr){
-        //console.log(item)
+      let duration=0;
+      for(let i=0;i<arr.length;i++){
+      	let item=arr[i];
+        // console.log(item)
         let lrcObj={};
         let timeStr=item.match("\\[(.+?)\\]")[1];
         let timeArr=timeStr.split(":");
-        let time=parseInt(timeArr[0])*60+parseInt(timeArr[1]);
-        lrcObj.time=time;
+        let time=parseInt(timeArr[0])*60+parseFloat(timeArr[1]);
+		if(i>0){
+        	let lastObj=this.lrcArr[i-1];
+        	duration=Math.floor((time-lastObj.time)*1000);
+        	//console.log(duration);
+        }
+        lrcObj.selected=false;
+        lrcObj.duration=duration;
+        lrcObj.time=time;      
         lrcObj.lrc=item.replace(new RegExp(/(\.\d{2,3})/g),'');
         this.lrcArr.push(lrcObj);
       }
-     		
-  	});
-    this.$root.$on("tick",cur=>{
-      console.log(cur);
+      		
+  	});  
+    this.$root.$on("play",()=>{
+       this.color();
 
-    })
+    });
+
+
+
   },
   methods:{
-  	
+  	color(){
+    	if(this.curIndex>=this.lrcArr.length){
+    		return;
+    	}
+    	setTimeout(()=>{
+    		if (this.curIndex>0) {
+    			this.lrcArr[this.curIndex-1].selected=false;
+    		}
+    		this.lrcArr[this.curIndex].selected=true;
+    		this.curIndex++;
+    		this.color();
+    	},this.lrcArr[this.curIndex].duration);
+    }
   }
 }
 </script>
@@ -60,11 +87,13 @@ export default {
 .lyric li{
 	list-style: none;
 	line-height: 2em;
+	transition:0.25s ease;
 }
 .t-gra{
 	color: #999;
 }
 .t-blu{
 	color:#22c;
+	transform: scaleY(1.25);
 }
 </style>
