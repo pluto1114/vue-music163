@@ -1,6 +1,6 @@
 <template>
 	<transition name="slide-fade">
-	<div class="lyric">	
+	<div id="lyric" class="lyric">	
 		<ul v-show="show">
 			<li v-for="x of lrcArr" :class="x.selected?selectedColor:defaultColor">{{x.lrc}}</li>
 		</ul>
@@ -33,8 +33,19 @@ export default {
   	});  
     
     this.$root.$on("changedIndex",(curIndex)=>{
-        this.color(curIndex);
+      this.curIndex=curIndex;
+      this.color(curIndex);
+
+      var container=document.getElementById("lyric");
+      console.log('scrollTop:'+container.scrollTop)
+      var element = document.querySelector('.t-gra');
+    
+      console.log(element.offsetHeight*this.curIndex-container.scrollTop)
+      if(element.offsetHeight*(this.curIndex*1.2)-container.scrollTop>element.offsetHeight*3){
+        container.scrollTop=element.offsetHeight*(this.curIndex*1.2);
+      }
     });
+    
     function convertLrcArr(arr){
       let lrcArr=[];
       let duration=0;
@@ -79,7 +90,7 @@ export default {
 	height:13.5em;
 	overflow-x:hidden; 
 	overflow-y: scroll;
-
+  transition:1s;
 }
 .lyric li{
 	list-style: none;
@@ -88,6 +99,7 @@ export default {
 }
 .t-gra{
 	color: #999;
+  transform: scaleY(1);
 }
 .t-blu{
 	color:#22c;
