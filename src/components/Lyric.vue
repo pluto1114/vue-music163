@@ -24,53 +24,50 @@ export default {
     }
   },
   mounted(){
-
   	this.$showLyric({music_id:this.id},data=>{
       this.show=true;
       let arr=data.lrc.lyric.split('\n');
+      
+      this.lrcArr=convertLrcArr(arr);
+      this.$root.$emit("loadedLyric",this.lrcArr);		
+  	});  
+    
+    this.$root.$on("changedIndex",(curIndex)=>{
+        this.color(curIndex);
+    });
+    function convertLrcArr(arr){
+      let lrcArr=[];
       let duration=0;
-      for(let i=0;i<arr.length;i++){
-      	let item=arr[i];
-        // console.log(item)
+      console.log(arr.length)
+      for(let i=0;i<arr.length-1;i++){
+        let item=arr[i];
         let lrcObj={};
         let timeStr=item.match("\\[(.+?)\\]")[1];
         let timeArr=timeStr.split(":");
         let time=parseInt(timeArr[0])*60+parseFloat(timeArr[1]);
-		if(i>0){
-        	let lastObj=this.lrcArr[i-1];
-        	duration=Math.floor((time-lastObj.time)*1000);
-        	//console.log(duration);
+        if(i>0){
+          let lastObj=lrcArr[i-1];
+          duration=time-lastObj.time;
         }
         lrcObj.selected=false;
         lrcObj.duration=duration;
-        lrcObj.time=time;      
+        lrcObj.time=time;
         lrcObj.lrc=item.replace(new RegExp(/(\.\d{2,3})/g),'');
-        this.lrcArr.push(lrcObj);
+        lrcArr[i]=lrcObj;
       }
-      		
-  	});  
-    this.$root.$on("play",()=>{
-       this.color();
-
-    });
-
-
-
+      return lrcArr;
+    }
   },
   methods:{
-  	color(){
-    	if(this.curIndex>=this.lrcArr.length){
-    		return;
-    	}
-    	setTimeout(()=>{
-    		if (this.curIndex>0) {
-    			this.lrcArr[this.curIndex-1].selected=false;
-    		}
-    		this.lrcArr[this.curIndex].selected=true;
-    		this.curIndex++;
-    		this.color();
-    	},this.lrcArr[this.curIndex].duration);
-    }
+  	color(curIndex){
+      for (var i = 0;i<this.lrcArr.length;i++) {
+        this.lrcArr[i].selected=false;
+      }
+      
+      this.lrcArr[curIndex-1].selected=true;
+    },
+
+    
   }
 }
 </script>

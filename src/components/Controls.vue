@@ -7,35 +7,57 @@
 </template>
 
 <script>
-
+import _ from 'lodash'
 export default {
   name: 'controls',
   data () {
     return {
     	show:false,
-      	mp3Url:''
+      mp3Url:'',
+      lrcTimeArr:[],
+      lastIndex:0
     }
   },
   mounted(){
   	var media=document.getElementById("media");
-  	var pos=0;
+
   	this.$root.$on('play',(mp3Url)=>{
   		this.show=true;				
-  		media.src=mp3Url;
-  		if (pos>0 && localStorage.lastUrl==mp3Url) {
-  			media.currentTime=pos;
-  		}
-  		localStorage.lastUrl=mp3Url;
-  		media.play();
-      // setInterval(()=>{
-      //   this.$root.$emit("tick",media.currentTime);
-      // }, 250);
+  		
+      if(this.mp3Url!=mp3Url){
+        this.mp3Url=mp3Url;
+      }
+    
+      setTimeout(()=>{
+        media.play();
+      },1);
+  		
   	});
+   
   	this.$root.$on('pause',()=>{
-  		media.pause();
-  		pos=media.currentTime;
-  		media.currentTime=0;
-  	});
+      media.pause();     
+    });
+   
+    this.$root.$on("loadedLyric",(lrcArr)=>{
+      console.log(_.map(lrcArr,'time'))
+      this.lrcTimeArr=_.map(lrcArr,'time');
+    });
+    media.addEventListener("pause",(e)=>{
+      
+    });
+    media.addEventListener("play",(e)=>{
+      
+    });
+    media.addEventListener("timeupdate",(e)=>{
+      // console.log("timeupdate:"+media.currentTime)
+      let curIndex=_.sortedIndex(this.lrcTimeArr, media.currentTime);
+      if(this.lastIndex!=curIndex){
+        this.lastIndex=curIndex;
+        console.log(curIndex+'---'+media.currentTime)
+        this.$root.$emit("changedIndex",curIndex);
+      }
+      
+    });
   }
 }
 </script>

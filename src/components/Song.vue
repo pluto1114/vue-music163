@@ -33,8 +33,7 @@ export default {
     return {
       id:(this.$route.params.id || '307525'),
       show:false,
-      song:null,
-      lrcArr:null
+      song:null
     }
   },
   created(){
