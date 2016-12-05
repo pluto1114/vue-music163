@@ -32,10 +32,15 @@ export default {
       this.$root.$emit("loadedLyric",this.lrcArr);		
   	});  
     
-    this.$root.$on("changedIndex",(curIndex)=>{
+    this.$root.$on("changedIndex",(curIndex,played)=>{
+      let lastIndex=this.curIndex; 
       this.curIndex=curIndex;
       this.color();
-      this.disappearLast();
+      if(!played){
+	    this.disappearLast();
+	  }else{
+	  	this.played(lastIndex);
+	  }
       //this.scroll();
     });
     
@@ -77,9 +82,13 @@ export default {
     		for(var i=2;i<this.curIndex;i++){
 				this.lrcArr[i-2].show=false;
     		}
-    		
     	}
-    	
+    },
+    played(lastIndex){
+    	for (var i = this.curIndex; i <=lastIndex; i++) {
+    		this.lrcArr[i].show=true;
+    	}
+    	this.disappearLast();
     },
     scroll(){
     	var container=document.getElementById("lyric");

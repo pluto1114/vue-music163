@@ -51,10 +51,13 @@ export default {
     media.addEventListener("timeupdate",(e)=>{
       //console.log("timeupdate:"+media.currentTime)
       let curIndex=_.sortedIndex(this.lrcTimeArr, media.currentTime);
-      if(this.lastIndex!=curIndex){
+      if(this.lastIndex<curIndex){
         this.lastIndex=curIndex;
-        console.log(curIndex+'---'+media.currentTime)
-        this.$root.$emit("changedIndex",curIndex);
+        this.$root.$emit("changedIndex",curIndex,false);
+      }else if(this.lastIndex>curIndex){
+      	//played is true
+      	this.lastIndex=curIndex;
+        this.$root.$emit("changedIndex",curIndex,true);
       }
       
     });
