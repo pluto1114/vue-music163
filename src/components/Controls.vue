@@ -49,7 +49,7 @@ export default {
       
     });
     media.addEventListener("timeupdate",(e)=>{
-      // console.log("timeupdate:"+media.currentTime)
+      //console.log("timeupdate:"+media.currentTime)
       let curIndex=_.sortedIndex(this.lrcTimeArr, media.currentTime);
       if(this.lastIndex!=curIndex){
         this.lastIndex=curIndex;

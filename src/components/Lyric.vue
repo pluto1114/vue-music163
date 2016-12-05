@@ -1,9 +1,9 @@
 <template>
 	<transition name="slide-fade">
 	<div id="lyric" class="lyric">	
-		<ul v-show="show">
-			<li v-for="x of lrcArr" :class="x.selected?selectedColor:defaultColor">{{x.lrc}}</li>
-		</ul>
+		<transition-group name="lyric" tag="ul">
+			<li v-for="x of lrcArr" :key="x.time" :class="x.selected?selectedColor:defaultColor" v-show="x.show">{{x.lrc}}</li>
+		</transition-group>
 		
 	</div>
 	</transition>
@@ -34,16 +34,9 @@ export default {
     
     this.$root.$on("changedIndex",(curIndex)=>{
       this.curIndex=curIndex;
-      this.color(curIndex);
-
-      var container=document.getElementById("lyric");
-      console.log('scrollTop:'+container.scrollTop)
-      var element = document.querySelector('.t-gra');
-    
-      console.log(element.offsetHeight*this.curIndex-container.scrollTop)
-      if(element.offsetHeight*(this.curIndex*1.2)-container.scrollTop>element.offsetHeight*3){
-        container.scrollTop=element.offsetHeight*(this.curIndex*1.2);
-      }
+      this.color();
+      this.disappearLast();
+      //this.scroll();
     });
     
     function convertLrcArr(arr){
@@ -54,30 +47,50 @@ export default {
         let item=arr[i];
         let lrcObj={};
         let timeStr=item.match("\\[(.+?)\\]")[1];
+     
+     	//declude not time
+        if(/[^0-9\.\:]/.test(timeStr)){   	
+        	continue;
+        }
         let timeArr=timeStr.split(":");
         let time=parseInt(timeArr[0])*60+parseFloat(timeArr[1]);
-        if(i>0){
-          let lastObj=lrcArr[i-1];
-          duration=time-lastObj.time;
-        }
+
         lrcObj.selected=false;
-        lrcObj.duration=duration;
+        lrcObj.show=true;
+       
         lrcObj.time=time;
         lrcObj.lrc=item.replace(new RegExp(/(\.\d{2,3})/g),'');
-        lrcArr[i]=lrcObj;
+        lrcArr.push(lrcObj);
       }
       return lrcArr;
     }
   },
   methods:{
-  	color(curIndex){
-      for (var i = 0;i<this.lrcArr.length;i++) {
-        this.lrcArr[i].selected=false;
-      }
-      
-      this.lrcArr[curIndex-1].selected=true;
+  	color(){
+      	for (var i = 0;i<this.lrcArr.length;i++) {
+        	this.lrcArr[i].selected=false;
+      	}
+      	this.lrcArr[this.curIndex-1].selected=true;
     },
-
+    disappearLast(){
+    	if (this.curIndex>=2) {
+    		for(var i=2;i<this.curIndex;i++){
+				this.lrcArr[i-2].show=false;
+    		}
+    		
+    	}
+    	
+    },
+    scroll(){
+    	var container=document.getElementById("lyric");
+      	console.log('scrollTop:'+container.scrollTop)
+      	var element = document.querySelector('.t-gra');
+    
+      	console.log(element.offsetHeight*this.curIndex-container.scrollTop)
+      	if(element.offsetHeight*(this.curIndex*1.2)-container.scrollTop>element.offsetHeight*3){
+        	container.scrollTop=element.offsetHeight*(this.curIndex*1.2);
+      	}
+    }
     
   }
 }
@@ -90,7 +103,6 @@ export default {
 	height:13.5em;
 	overflow-x:hidden; 
 	overflow-y: scroll;
-  transition:1s;
 }
 .lyric li{
 	list-style: none;
@@ -99,10 +111,19 @@ export default {
 }
 .t-gra{
 	color: #999;
-  transform: scaleY(1);
 }
 .t-blu{
 	color:#22c;
-	transform: scaleY(1.25);
+	
+}
+
+.lyric-enter-active, .lyric-leave-active {
+  /*transition: transform 1s;*/
+  transition: all 2s;
+}
+.lyric-leave-active {
+  /*opacity: 0.5;*/
+  transform: scaleY(0);
+  height:0;
 }
 </style>
