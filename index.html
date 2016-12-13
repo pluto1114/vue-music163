@@ -1,9 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang=zh-cmn-Hans>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>music163</title>
+    
+    <script type="text/javascript">
+    function is_weixin(){
+		var ua = navigator.userAgent.toLowerCase();
+		if(ua.match(/MicroMessenger/i)=="micromessenger") {
+			return true;
+	 	} else {
+			return false;
+		}
+	}
+	if(is_weixin()){
+		alert('请点击右上角，并选择"在浏览器中打开"！');
+	}
+  </script>
   </head>
   <body>
     <div id="app"></div>
@@ -16,5 +30,6 @@
             FastClick.attach(document.body);  
         }, false);  
     }  
+    
   </script>
 </html>
