@@ -29,13 +29,11 @@ npm run dev
 # build for production with minification
 npm run build
 ```
-## Demo Site
-
-# http://60.205.178.25:8080/
 
 
 
-### app截图
+
+## app截图
 ![image](http://7xiakq.com1.z0.glb.clouddn.com/vue-music163/images/show01.png)
 
 ![image](http://7xiakq.com1.z0.glb.clouddn.com/vue-music163/images/show02.png)
