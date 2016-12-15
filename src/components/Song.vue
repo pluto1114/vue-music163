@@ -38,6 +38,7 @@ export default {
   },
   created(){
   	Indicator.open('加载中...');
+  	this.$root.$emit("pause");
   	this.$showSong({music_id:this.id},data=>{
   		this.song=data.songs[0];
   		Indicator.close();
