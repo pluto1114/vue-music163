@@ -7,7 +7,7 @@
       <div class="f1">
         <mt-field v-model="value" placeholder="输入歌曲名称或歌手姓名"></mt-field>
       </div>
-      <div style="margin-left:20px;" @click="handleSearch">
+      <div style="margin-left:20px;" v-tap="{methods:handleSearch}">
           <mt-button type="primary">搜索</mt-button>
       </div>
     </div>   

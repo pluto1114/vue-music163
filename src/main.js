@@ -8,6 +8,9 @@ import { Button, Cell ,Field} from 'mint-ui';
 import 'mint-ui/lib/style.css'
 import VueResource from 'vue-resource'
 import DataApi from './data-api'
+import vueTap from 'v-tap';
+
+Vue.use(vueTap);
 Vue.use(VueRouter)
 // Vue.use(Button)
 // Vue.use(Cell)

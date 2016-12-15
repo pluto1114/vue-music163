@@ -9,10 +9,10 @@
 				<div class="t-gra">歌手：<span class="t-blu">{{song.artists[0].name}}</span></div>
 				<div class="t-gra">所属专辑：<span class="t-blu">{{song.album.name}}</span></div>
 				<div class="btn-controls container-flex">
-					<div class="btn-con" @click="handlePlay">
+					<div class="btn-con" v-tap="{methods:handlePlay}">
 		          		<mt-button type="primary">播放</mt-button>
 		      		</div>
-		      		<div class="btn-con" @click="handlePause">
+		      		<div class="btn-con" v-tap="{methods:handlePause}">
 		          		<mt-button type="primary">暂停</mt-button>
 		      		</div>
 		      	</div>
