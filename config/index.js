@@ -36,8 +36,7 @@ module.exports = {
                 '^/api':''
             },
             headers:{
-                'Referer': 'http://music.163.com/search/',
-                'Content-Type':'application/x-www-form-urlencoded'
+                'Referer': 'http://music.163.com/search/'
             }
         }
     }

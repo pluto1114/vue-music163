@@ -20,7 +20,7 @@ DataApiPlugin.install = function (Vue, options) {
     console.log(postData);
      
     Vue.http.post("/api/search/get/web",postData).then(resp=>{
-      // console.log(resp.data);
+      console.log(resp.data);
       callback(resp.data);
     },resp=>{
       console.log("request error");
@@ -29,7 +29,7 @@ DataApiPlugin.install = function (Vue, options) {
 
   Vue.prototype.$showSong = function (options,callback) {   
     Vue.http.get("/api/song/detail?id="+options.music_id+"&ids="+'%5B'+options.music_id+'%5D').then(resp=>{
-      // console.log(resp.data);
+      console.log(resp.data);
       callback(resp.data);
     },resp=>{
       console.log("request error");
@@ -38,7 +38,7 @@ DataApiPlugin.install = function (Vue, options) {
 
   Vue.prototype.$showLyric = function (options,callback) {   
     Vue.http.get("/api/song/lyric?os=pc&id="+options.music_id+'&lv=-1&kv=-1&tv=-1').then(resp=>{
-      // console.log(resp.data);
+      console.log(resp.data);
       callback(resp.data);
     },resp=>{
       console.log("request error");
