@@ -3,9 +3,11 @@
 > A Vue.js project for music
 ### Use
 * vuejs-2.0
-* vue-router
-* mint-ui
 * vue-cli
+* vue-router
+* vuex
+* mint-ui
+
 
 ## Support
 * Chrome

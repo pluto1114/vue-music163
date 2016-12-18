@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     
-    <welcome :show="showWelcome" @afterLeave="toSongs"></welcome>
+    <welcome @afterLeave="toSongs"></welcome>
  
     <div class="container-flex">
       <div class="f1">
@@ -34,16 +34,9 @@ import { Toast } from 'mint-ui';
 export default {
   name: 'app',
   data:function(){
-    // init searchWordArr
-    var searchWordArr=[];
-    if (localStorage.searchWords) {
-      searchWordArr=JSON.parse(localStorage.searchWords);
-    }
-    console.log("searchWordArr:"+searchWordArr);
     return {
       value:'',
-      showWelcome:true,
-      searchWordArr:searchWordArr
+      searchWordArr:this.$store.state.searchWordArr
     }
   },
   components: {
@@ -57,10 +50,10 @@ export default {
         Toast('搜索关键字不可为空');
         return;
       }
-      if(!this.showWelcome){
+      if(!this.$store.state.showWelcome){
         this.toSongs();
       }else{
-        this.showWelcome=false;
+        this.$store.commit("hideWelcome");
       }
     },
     handleWord(word){
@@ -69,17 +62,7 @@ export default {
     },
     toSongs(){
       this.$router.push({ path: '/songs/'+this.value});
-
-      //update searchWords
-      if(this.searchWordArr.indexOf(this.value)<0){
-        this.searchWordArr.unshift(this.value);
-      }
-      if(this.searchWordArr.length>5){
-        this.searchWordArr=this.searchWordArr.slice(0,5);
-      }
-      
-      localStorage.searchWords=JSON.stringify(this.searchWordArr);
-      
+      this.$store.commit("addSearchWord",{value:this.value});
     }
   }
 }

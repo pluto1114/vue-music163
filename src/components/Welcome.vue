@@ -10,7 +10,11 @@
 <script>
 export default {
   name: 'welcome',
-  props:['show'],
+  computed:{
+    show(){
+      return this.$store.state.showWelcome;
+    }
+  },
   data () {
     return {
       msg: '拥抱Vue，享受生活'

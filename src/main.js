@@ -4,18 +4,14 @@ import App from './App'
 import Songs from './components/Songs'
 import Song from './components/Song'
 import MintUI from 'mint-ui'
-import { Button, Cell ,Field} from 'mint-ui';
 import 'mint-ui/lib/style.css'
 import VueResource from 'vue-resource'
 import DataApi from './data-api'
 import vueTap from 'v-tap';
+import store from './store'
 
 Vue.use(vueTap);
 Vue.use(VueRouter)
-// Vue.use(Button)
-// Vue.use(Cell)
-// Vue.use(Field)
-
 Vue.use(MintUI)
 Vue.use(VueResource)
 Vue.use(DataApi)
@@ -36,7 +32,8 @@ var vm=new Vue({
   el: '#app',
   template: '<App/>',
   components: { App },
-  router
+  router,
+  store
 })
 
 

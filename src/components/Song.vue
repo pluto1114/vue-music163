@@ -1,7 +1,7 @@
 <template>
 	<transition name="slide-fade">
 	<div class="song">	
-		<div  v-if="show" class="card container-flex">
+		<div  v-if="song" class="card container-flex">
 			<div class="song-pic" :style="{backgroundImage:'url('+song.album.picUrl+')'}">
 			</div>
 			<div class="f1">
@@ -32,18 +32,22 @@ export default {
   data () {
     return {
       id:(this.$route.params.id || '307525'),
-      show:false,
-      song:null
+      show:false
     }
+  },
+  computed:{
+  	song(){
+  		return this.$store.state.song;
+  	}
   },
   created(){
   	Indicator.open('加载中...');
   	this.$root.$emit("pause");
-  	this.$showSong({music_id:this.id},data=>{
-  		this.song=data.songs[0];
-  		Indicator.close();
-  		this.show=true;
-  	});
+  	
+  	this.$store.dispatch("FETCH_SONG",this.id).then(()=>{
+	    Indicator.close();
+	    this.show=true;
+	}); 
   	
   },
   methods:{

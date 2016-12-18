@@ -14,11 +14,12 @@
 import { Indicator } from 'mint-ui';
 export default {
   name: 'songs',
-  data () {
-    return {
-      show: false,
-      loading: true,
-      songs:null
+  data:function(){
+    return {show:false};
+  },
+  computed:{
+    songs(){
+      return this.$store.state.songs;
     }
   },
   created () {
@@ -29,14 +30,13 @@ export default {
   },
   methods:{
   	fetchData(){
-  		Indicator.open('加载中...');
-		let word=this.$route.params.word || '汪峰';
+  	  Indicator.open('加载中...');
+		  let word=this.$route.params.word || '汪峰';
 	  	console.log(word)
-	  	this.$searchSong({s:word},data=>{
-	      this.songs=data.result.songs;
-	      Indicator.close();
-          this.show=true;
-	    });
+      this.$store.dispatch("FETCH_SONG_LIST",{s:word}).then(()=>{
+        Indicator.close();
+        this.show=true;
+      }); 
   	}
   }
 }

@@ -13,9 +13,12 @@ export default {
   data () {
     return {
     	show:false,
-      mp3Url:'',
-      lrcTimeArr:[],
-      lastIndex:0
+      mp3Url:''
+    }
+  },
+  computed:{
+    lrcTimeArr(){
+      return this.$store.state.lrcTimeArr;
     }
   },
   mounted(){
@@ -38,10 +41,7 @@ export default {
       media.pause();     
     });
    
-    this.$root.$on("loadedLyric",(lrcArr)=>{
-      console.log(_.map(lrcArr,'time'))
-      this.lrcTimeArr=_.map(lrcArr,'time');
-    });
+    
     media.addEventListener("pause",(e)=>{
       
     });
@@ -51,15 +51,7 @@ export default {
     media.addEventListener("timeupdate",(e)=>{
       //console.log("timeupdate:"+media.currentTime)
       let curIndex=_.sortedIndex(this.lrcTimeArr, media.currentTime);
-      if(this.lastIndex<curIndex){
-        this.lastIndex=curIndex;
-        this.$root.$emit("changedIndex",curIndex,false);
-      }else if(this.lastIndex>curIndex){
-      	//played is true
-      	this.lastIndex=curIndex;
-        this.$root.$emit("changedIndex",curIndex,true);
-      }
-      
+      this.$store.dispatch("TIME_UPDATE",curIndex);
     });
   }
 }
