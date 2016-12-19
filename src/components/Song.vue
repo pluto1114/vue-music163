@@ -42,8 +42,8 @@ export default {
   },
   created(){
   	Indicator.open('加载中...');
-  	this.$root.$emit("pause");
-  	
+
+  	this.$store.commit("changeCanPlay",false);
   	this.$store.dispatch("FETCH_SONG",this.id).then(()=>{
 	    Indicator.close();
 	    this.show=true;
@@ -52,7 +52,9 @@ export default {
   },
   methods:{
   	handlePlay(){
-  		this.$root.$emit("play",this.song.mp3Url);
+  		this.$store.commit("loadMp3Url",this.song.mp3Url);
+  		//this.$store.dispatch("");
+  		this.$root.$emit("play");
   	},
   	handlePause(){
   		this.$root.$emit("pause");

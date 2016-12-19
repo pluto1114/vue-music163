@@ -1,40 +1,44 @@
 <template>
 	<transition name="slide-fade">
 	<div v-show="show" class="controls">
-	     <audio id="media" :src="mp3Url" controls></audio> 
+	     <audio id="media" :src="song.mp3Url" controls></audio> 
 	</div>
 	</transition>
 </template>
 
 <script>
-import _ from 'lodash'
+import { Toast } from 'mint-ui';
 export default {
   name: 'controls',
   data () {
     return {
-    	show:false,
-      mp3Url:''
+    	show:false
     }
   },
   computed:{
-    lrcTimeArr(){
-      return this.$store.state.lrcTimeArr;
+    song(){
+      return this.$store.state.song || {mp3Url:''};
+    },
+    canPlay(){
+      return this.$store.state.canPlay;
     }
+  },
+  created(){
+    this.$store.commit("changeCanPlay",false);
   },
   mounted(){
   	var media=document.getElementById("media");
 
-  	this.$root.$on('play',(mp3Url)=>{
-  		this.show=true;				
-  		
-      if(this.mp3Url!=mp3Url){
-        this.mp3Url=mp3Url;
-      }
-    
-      setTimeout(()=>{
-        media.play();
-      },1);
-  		
+  	this.$root.$on('play',()=>{
+      console.log("canplay",this.canPlay);		
+      if (!this.canPlay) {
+        Toast("音乐加载失败，还是换一个试试吧");
+      }else{
+        this.show=true; 
+        setTimeout(()=>{
+          media.play();
+        },1);
+  		}
   	});
    
   	this.$root.$on('pause',()=>{
@@ -42,16 +46,15 @@ export default {
     });
    
     
-    media.addEventListener("pause",(e)=>{
+   
+    media.addEventListener("canplay",(e)=>{
+      this.$store.commit("changeCanPlay",true);
       
-    });
-    media.addEventListener("play",(e)=>{
       
     });
     media.addEventListener("timeupdate",(e)=>{
       //console.log("timeupdate:"+media.currentTime)
-      let curIndex=_.sortedIndex(this.lrcTimeArr, media.currentTime);
-      this.$store.dispatch("TIME_UPDATE",curIndex);
+      this.$store.dispatch("TIME_UPDATE",media.currentTime);
     });
   }
 }

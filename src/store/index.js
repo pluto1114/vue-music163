@@ -7,12 +7,13 @@ const store = new Vuex.Store({
     state: {
         showWelcome: true,
         searchWordArr: localStorage.searchWords ? JSON.parse(localStorage.searchWords) : [],
-        songs: null,
+        songs: [],
         song: null,
         lyricArr: [],
         lrcTimeArr: [],
         lrcCurIndex: 0,
-        lrcLastIndex: 0
+        lrcLastIndex: 0,
+        canPlay:false
     },
     getters: {
 
@@ -39,7 +40,8 @@ const store = new Vuex.Store({
             });
             return p;
         },
-        TIME_UPDATE({ state, commit }, curIndex) {
+        TIME_UPDATE({ state, commit },currentTime) {
+            let curIndex=_.sortedIndex(state.lrcTimeArr, currentTime);
             if (state.lrcLastIndex == curIndex) {
                 return;
             }
@@ -96,7 +98,14 @@ const store = new Vuex.Store({
                 }
             }
         },
-        
+        loadMp3Url(state,mp3Url){
+            if(state.mp3Url!=mp3Url){
+                state.mp3Url=mp3Url;
+            }
+        },
+        changeCanPlay(state,canPlay){
+            state.canPlay=canPlay;
+        }
     }
 
 });
