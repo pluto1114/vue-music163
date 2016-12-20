@@ -1,11 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
-import Songs from './components/Songs'
-import Song from './components/Song'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
-
 import vueTap from 'v-tap';
 import store from './store'
 
@@ -21,8 +18,8 @@ const router = new VueRouter({
   base: __dirname,
   routes: [
     { path: '/' },
-    { path: '/songs/:word', component: Songs },
-    { path: '/song/:id', component:Song },   
+    { path: '/songs/:word', component: require('./views/Songs') },
+    { path: '/song/:id', component:require('./views/Song') },   
   ]
 })
 

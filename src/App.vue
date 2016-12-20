@@ -16,7 +16,7 @@
         <mt-badge type="primary" size="large" v-for="word of searchWordArr" :key="word">
           <span @click="handleWord(word)">{{word}}</span>
         </mt-badge>
-    </transition-group>
+      </transition-group>
     </div>
     <router-view class="view"></router-view>
     <controls class="my-controls"></controls>

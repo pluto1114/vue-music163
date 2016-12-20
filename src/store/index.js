@@ -98,11 +98,6 @@ const store = new Vuex.Store({
                 }
             }
         },
-        loadMp3Url(state,mp3Url){
-            if(state.mp3Url!=mp3Url){
-                state.mp3Url=mp3Url;
-            }
-        },
         changeCanPlay(state,canPlay){
             state.canPlay=canPlay;
         }

@@ -26,7 +26,8 @@
 
 <script>
 import { Indicator } from 'mint-ui';
-import Lyric from './Lyric';
+import Lyric from '../components/Lyric';
+import { mapState } from 'vuex';
 export default {
   name: 'song',
   data () {
@@ -35,11 +36,7 @@ export default {
       show:false
     }
   },
-  computed:{
-  	song(){
-  		return this.$store.state.song;
-  	}
-  },
+  computed:mapState(['song']),
   created(){
   	Indicator.open('加载中...');
 
@@ -52,8 +49,6 @@ export default {
   },
   methods:{
   	handlePlay(){
-  		this.$store.commit("loadMp3Url",this.song.mp3Url);
-  		//this.$store.dispatch("");
   		this.$root.$emit("play");
   	},
   	handlePause(){

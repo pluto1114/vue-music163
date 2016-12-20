@@ -10,7 +10,7 @@
 </template>
 
 <script>
-
+import { mapState } from 'vuex';
 export default {
   name: 'lyric',
   props:['id'],
@@ -22,11 +22,9 @@ export default {
       selectedColor:'t-blu'
     }
   },
-  computed:{
-    lrcArr(){
-      return this.$store.state.lyricArr;
-    }
-  },
+  computed:mapState({
+    lrcArr: state=>state.lyricArr
+  }),
   mounted(){ 
     this.$store.dispatch("FETCH_LYRIC",this.id).then(()=>{
       this.show=true;

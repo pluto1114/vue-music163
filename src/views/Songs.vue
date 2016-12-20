@@ -12,16 +12,13 @@
 
 <script>
 import { Indicator } from 'mint-ui';
+import { mapState } from 'vuex';
 export default {
   name: 'songs',
   data:function(){
     return {show:false};
   },
-  computed:{
-    songs(){
-      return this.$store.state.songs;
-    }
-  },
+  computed:mapState(['songs']),
   created () {
     this.fetchData()
   },

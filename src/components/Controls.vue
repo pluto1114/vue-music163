@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { Toast } from 'mint-ui';
 export default {
   name: 'controls',
@@ -15,14 +16,10 @@ export default {
     	show:false
     }
   },
-  computed:{
-    song(){
-      return this.$store.state.song || {mp3Url:''};
-    },
-    canPlay(){
-      return this.$store.state.canPlay;
-    }
-  },
+  computed:mapState({
+    song:state=>state.song || {mp3Url:''},
+    canPlay:state=>state.canPlay,
+  }),
   created(){
     this.$store.commit("changeCanPlay",false);
   },
