@@ -36,7 +36,7 @@ npm run build
 
 # http://60.205.178.25/
 
-
+![image](http://git.oschina.net/xiongmao1114/vue-music163/tree/master/static/qrcode.png)
 
 
 ## app截图
