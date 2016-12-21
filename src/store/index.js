@@ -16,7 +16,7 @@ const store = new Vuex.Store({
         canPlay:false
     },
     getters: {
-
+        
     },
     actions: {
         FETCH_SONG_LIST(context, options) {
@@ -40,23 +40,7 @@ const store = new Vuex.Store({
             });
             return p;
         },
-        TIME_UPDATE({ state, commit },currentTime) {
-            let curIndex=_.sortedIndex(state.lrcTimeArr, currentTime);
-            if (state.lrcLastIndex == curIndex) {
-                return;
-            }
-            state.lrcCurIndex = curIndex;
-            commit("color");
-            if (state.lrcLastIndex > curIndex) {
-                console.log('played');
-                for (var i = curIndex; i <= state.lrcLastIndex; i++) {
-                    if(state.lyricArr[i])
-                        state.lyricArr[i].show = true;
-                }
-            }
-            commit("disappear");
-            state.lrcLastIndex = curIndex;
-        }
+        
     },
     mutations: {
         hideWelcome(state) {
@@ -82,21 +66,6 @@ const store = new Vuex.Store({
             let arr = payload.lyric.split('\n');
             state.lyricArr = convertLrcArr(arr);
             state.lrcTimeArr=_.map(state.lyricArr,'time');
-        },
-        color(state) {
-            for (var i = 0; i < state.lyricArr.length; i++) {
-                state.lyricArr[i].selected = false;
-            }
-            if (state.lrcCurIndex > 0) {
-                state.lyricArr[state.lrcCurIndex - 1].selected = true;
-            }
-        },
-        disappear(state) {
-            if (state.lrcCurIndex >= 2) {
-                for (var i = 2; i < state.lrcCurIndex; i++) {
-                    state.lyricArr[i - 2].show = false;
-                }
-            }
         },
         changeCanPlay(state,canPlay){
             state.canPlay=canPlay;
