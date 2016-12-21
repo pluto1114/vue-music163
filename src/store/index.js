@@ -11,9 +11,8 @@ const store = new Vuex.Store({
         song: null,
         lyricArr: [],
         lrcTimeArr: [],
-        lrcCurIndex: 0,
-        lrcLastIndex: 0,
-        canPlay:false
+        canPlay:false,
+        lrcMarginTop:0
     },
     getters: {
         
@@ -69,6 +68,9 @@ const store = new Vuex.Store({
         },
         changeCanPlay(state,canPlay){
             state.canPlay=canPlay;
+        },
+        changeLrcMarginTop(state,lrcMarginTop){
+            state.lrcMarginTop=lrcMarginTop;
         }
     }
 

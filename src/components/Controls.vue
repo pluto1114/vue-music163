@@ -9,7 +9,8 @@
 <script>
 import { mapState } from 'vuex';
 import { Toast } from 'mint-ui';
-import _ from 'lodash'
+import _ from 'lodash';
+
 export default {
   name: 'controls',
   data () {
@@ -29,8 +30,7 @@ export default {
     this.$store.commit("changeCanPlay",false);
   },
   mounted(){
-  	var media=document.getElementById("media");
-
+    var media=document.getElementById("media");
   	this.$root.$on('play',()=>{
       console.log("canplay",this.canPlay);		
       if (!this.canPlay) {
@@ -38,6 +38,7 @@ export default {
       }else{
         this.show=true; 
         setTimeout(()=>{
+          console.log("duration", media.duration)
           media.play();
         },1);
   		}
@@ -78,9 +79,10 @@ export default {
     },
     disappear() {
         if (this.lrcCurIndex >= 2) {
-            for (var i = 2; i < this.lrcCurIndex; i++) {
-                this.lyricArr[i - 2].show = false;
-            }
+            // for (var i = 2; i < this.lrcCurIndex; i++) {
+            //     this.lyricArr[i - 2].show = false;
+            // }
+            this.$store.commit("changeLrcMarginTop",this.lrcCurIndex*(-2)+4.25);
         }
     },
     

@@ -1,9 +1,10 @@
 <template>
 	<transition name="slide-fade">
 	<div id="lyric" class="lyric">	
-		<transition-group name="lyric" tag="ul">
+    <ul :style="{marginTop:lrcMarginTop+'em'}">
 			<li v-for="x of lrcArr" :key="x.time" :class="x.selected?selectedColor:defaultColor" v-show="x.show">{{x.lrc}}</li>
-		</transition-group>
+    </ul>  
+	
 		
 	</div>
 	</transition>
@@ -23,7 +24,8 @@ export default {
     }
   },
   computed:mapState({
-    lrcArr: state=>state.lyricArr
+    lrcArr: state=>state.lyricArr,
+    lrcMarginTop:state=>state.lrcMarginTop
   }),
   mounted(){ 
     this.$store.dispatch("FETCH_LYRIC",this.id).then(()=>{
@@ -57,13 +59,9 @@ export default {
 	
 }
 
-.lyric-enter-active, .lyric-leave-active {
+ul {
   /*transition: transform 1s;*/
-  transition: all 2s;
+  transition: all 1s;
 }
-.lyric-leave-active {
-  /*opacity: 0.5;*/
-  transform: scaleY(0);
-  height:0;
-}
+
 </style>
