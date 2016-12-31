@@ -43,7 +43,7 @@ h1 {
 }
 .neonText h2 {
   color: #fff;
-  text-shadow:0 0 5px #CCCCCC, 0 0 10px #CCCCCC, 0 0 15px #CCCCCC, 0 0 20px #095816, 0 0 25px #095816, 0 0 30px #095816, 0 0 50px #095816, 0 0 80px #095816, 0 0 100px #095816, 0 0 150px #095816
+  text-shadow:0 0 5px #CCCCCC, 0 0 10px #CCCCCC, 0 0 15px #CCCCCC, 0 0 20px #26a2ff, 0 0 25px #26a2ff, 0 0 30px #26a2ff, 0 0 50px #26a2ff, 0 0 80px #26a2ff, 0 0 100px #26a2ff, 0 0 150px #26a2ff
 }
 
 .slide-up-enter-active {

@@ -1,12 +1,34 @@
 <template>
 	<transition name="slide-fade">
 	<div v-show="show" class="controls">
-	     <audio id="media" :src="song.mp3Url" @timeupdate="handleTimeUpdate" @canplay="handleCanPlay" controls></audio> 
+	     <audio id="media" :src="song.mp3Url" @timeupdate="handleTimeUpdate" @canplay="handleCanPlay" controls></audio>
+       <!-- <div class="audioplayer">
+            <audio preload="auto" controls="" style="width: 0px; height: 0px; visibility: hidden;">
+                <source src="audio/song.mp3">
+                <source src="audio/song.ogg">
+            </audio>
+            <div class="audioplayer-playpause" title="Play"><a href="#">Play</a></div>
+            <div class="audioplayer-time audioplayer-time-current">00:00</div>
+            <div class="audioplayer-bar">
+                <div class="audioplayer-bar-loaded" style="width: 100%;"></div>
+                <div class="audioplayer-bar-played"></div>
+            </div>
+            <div class="audioplayer-time audioplayer-time-duration">{{duration}}</div>
+            <div class="audioplayer-volume">
+                <div class="audioplayer-volume-button" title="Volume"><a href="#">Volume</a></div>
+                <div class="audioplayer-volume-adjust">
+                    <div>
+                        <div style="height: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>  -->
 	</div>
 	</transition>
 </template>
 
 <script>
+import '../assets/css/audioplayer.css';
 import { mapState } from 'vuex';
 import { Toast } from 'mint-ui';
 import _ from 'lodash';
@@ -17,7 +39,8 @@ export default {
     return {
     	show:false,
       lrcCurIndex:0,
-      lrcLastIndex:0
+      lrcLastIndex:0,
+      duration:0
     }
   },
   computed:mapState({
@@ -37,6 +60,7 @@ export default {
         Toast("音乐加载失败，还是换一个试试吧");
       }else{
         this.show=true; 
+        this.duration=media.duration;
         setTimeout(()=>{
           console.log("duration", media.duration)
           media.play();

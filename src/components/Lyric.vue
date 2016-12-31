@@ -41,8 +41,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .lyric{
-	margin-top: 1em;
-	height:13.5em;
+
+	height:8.5em;
 	overflow-x:hidden; 
 	overflow-y: scroll;
 }
