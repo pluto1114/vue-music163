@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="">
     
     <welcome @afterLeave="toSongs"></welcome>
  
@@ -19,7 +19,7 @@
       </transition-group>
     </div>
     <router-view class="view"></router-view>
-    <controls class="my-controls"></controls>
+    <!-- <controls class="my-controls"></controls> -->
     
 
 
@@ -29,8 +29,8 @@
 
 <script>
 import Welcome from './components/Welcome'
-import Controls from './components/Controls'
 import { Toast } from 'mint-ui';
+
 export default {
   name: 'app',
   data:function(){
@@ -39,9 +39,9 @@ export default {
       searchWordArr:this.$store.state.searchWordArr
     }
   },
+  
   components: {
-    Welcome,
-    Controls
+    Welcome
   },
   methods:{
     handleSearch(){
@@ -79,7 +79,9 @@ export default {
     linear-gradient(to bottom, #D5DEE7 0%, #E8EBF2 50%, #E2E7ED 100%),
     linear-gradient(to bottom, rgba(0,0,0,0.02) 50%, rgba(255,255,255,0.02) 61%, rgba(0,0,0,0.02) 73%),
     linear-gradient(33deg, rgba(255,255,255,0.20) 0%, rgba(0,0,0,0.20) 100%);
-background-blend-mode: normal,color-burn;
+  background-blend-mode: normal,color-burn;
+  
+  min-height: 640px;
 }
 a{
   text-decoration:none; 
@@ -112,7 +114,7 @@ a{
   width: 95%;
   position: fixed;
   left: 0;
-  bottom: 1em;
+  bottom: 2.5em;
   padding:0 .8em;
 }
 

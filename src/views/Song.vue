@@ -11,13 +11,14 @@
 				<!-- <div class="t-gra">所属专辑：<span class="t-blu">{{song.album.name}}</span></div> -->
 						
 				<div class="btn-controls container-flex">
-					<div class="btn-con" v-tap="{methods:handlePlay}">
+					<div class="btn-con" @click="handlePlay">
 		          		<i class="fa fa-2x" :class="played" style="color:#d5d7dd;"></i>
 		      		</div>
 		      		
 		      	</div>
 	      	<Lyric :id="id"></Lyric>
 	      	<!-- <audio id="media" :src="song.mp3Url" controls></audio>  -->
+	      	<controls class="my-controls"></controls>
 		</div>
 
 	</div>
@@ -28,6 +29,7 @@
 import '../assets/css/font-awesome.min.css';
 import { Indicator } from 'mint-ui';
 import Lyric from '../components/Lyric';
+import Controls from '../components/Controls';
 import { mapState } from 'vuex';
 export default {
   name: 'song',
@@ -35,11 +37,11 @@ export default {
     return {
       id:(this.$route.params.id || '307525'),
       show:false,
-      playing:false
+      
     }
   },
   computed:{
-  	...mapState(['song']),
+  	...mapState(['song','playing']),
   	played(){
   		return {'fa-play':!this.playing,'fa-stop':this.playing};
   	}
@@ -58,26 +60,26 @@ export default {
   	handlePlay(){
   		if(!this.playing){
 	  		this.$root.$emit("play");
-	  		this.playing=true;
+	  		this.$store.commit("changePlaying",true);
 	  	}else{
 	  		this.$root.$emit("pause");
-	  		this.playing=false;
+	  		this.$store.commit("changePlaying",false);
 	  	}
   	}
   },
-  components:{Lyric}
+  components:{Lyric,Controls}
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .song{
-	padding-top: 1em;
+	padding-top: 0.2em;
 	
 }
 .song-pic{
-	width:15em;
-	height:15em;
+	width:8em;
+	height:8em;
 	margin: 0 auto;
 
 	background-repeat:no-repeat;
@@ -96,10 +98,11 @@ export default {
 	text-align: center;
 }
 .btn-con{
-	margin: 0.65em auto;
+	margin: 0.4em auto;
 	background-color: #2c3e50;
-	padding: 0.8em 1em;
+	padding: 0.5em 0.8em;
 	border-radius: 50%;
+	opacity: 0.6;
 }
 .t-gra{
 	color: #999;
@@ -109,6 +112,13 @@ export default {
 }
 .rotating{
 	animation: rotate 60s linear 0s infinite normal both running;
+}
+.my-controls{
+  width: 95%;
+  position: fixed;
+  left: 0;
+  bottom: 0.5em;
+  padding:0 .8em;
 }
 
 @keyframes rotate
