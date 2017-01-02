@@ -4,6 +4,7 @@
 		<div  v-if="song" class="card ">
 			<div class="song-pic" :class="{rotating:playing}" :style="{backgroundImage:'url('+song.album.picUrl+')'}">
 			</div>
+		
 			<div class="song-info">
 				<h4>{{song.name}}</h4>
 				<div style="font-size:0.9em;">{{song.artists[0].name}}</div>
@@ -60,10 +61,10 @@ export default {
   	handlePlay(){
   		if(!this.playing){
 	  		this.$root.$emit("play");
-	  		this.$store.commit("changePlaying",true);
+	  		
 	  	}else{
 	  		this.$root.$emit("pause");
-	  		this.$store.commit("changePlaying",false);
+	  		
 	  	}
   	}
   },
@@ -75,7 +76,7 @@ export default {
 <style scoped>
 .song{
 	padding-top: 0.2em;
-	
+	perspective: 1000px;
 }
 .song-pic{
 	width:8em;
@@ -92,8 +93,9 @@ export default {
 	text-align: center;
 }
 .card{
-
+	transform-style: preserve-3d;
 }
+
 .btn-controls{
 	text-align: center;
 }
@@ -111,25 +113,25 @@ export default {
 	color:#22c;
 }
 .rotating{
-	animation: rotate 60s linear 0s infinite normal both running;
+	animation: rotate 30s linear 0s infinite normal both running;
 }
 .my-controls{
   width: 95%;
   position: fixed;
   left: 0;
-  bottom: 0.5em;
+  bottom: -1em;
   padding:0 .8em;
 }
 
 @keyframes rotate
 {
-from {transform:rotate(0deg);}
-to {transform:rotate(360deg);}
+from {transform:rotateY(0deg);}
+to {transform:rotateY(360deg);}
 }
 
 @-webkit-keyframes rotate /*Safari and Chrome*/
 {
-from {transform:rotate(0deg);}
-to {transform:rotate(360deg);}
+from {transform:rotateY(0deg);}
+to {transform:rotateY(360deg);}
 }
 </style>

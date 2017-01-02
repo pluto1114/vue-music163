@@ -94,7 +94,8 @@ export default {
   	});
    
   	this.$root.$on('pause',()=>{
-      media.pause();     
+      media.pause();   
+      this.$store.commit("changePlaying",false);  
     });
   },
   methods:{
