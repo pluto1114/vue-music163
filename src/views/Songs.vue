@@ -1,12 +1,12 @@
 <template>
-  <div class="songs">
+  <div class="songs animation-style-1">
   	
-  	<transition-group name="slide-fade">
-  	<mt-cell v-if="show" :title="x.name" :label="x.artists[0].name" is-link :to="'/song/'+x.id" v-for="x of songs" :key="x.id">
+  	<!-- <transition-group name="slide-fade"> -->
+  	<mt-cell v-if="show" class="item" :title="x.name" :label="x.artists[0].name" is-link :to="'/song/'+x.id" v-for="x of songs" :key="x.id">
   		<span>专辑《{{x.album.name}}》</span>
   	</mt-cell>
     
-	</transition-group>
+	<!-- </transition-group> -->
   </div>
 </template>
 
@@ -20,6 +20,7 @@ export default {
   },
   computed:mapState(['songs']),
   created () {
+    this.$store.commit("changePlaying",false);
     this.fetchData()
   },
   watch: {
@@ -40,12 +41,32 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" rel="stylesheet/scss" scoped>
 .songs .mint-cell{
   background-color: transparent;
 }
 .error {
   color: red;
 }
-
+.animation-style-1 > .item {
+    @for $i from 1 through 15 {
+        &:nth-child(#{$i}) {
+            opacity: 0;
+            animation-name: animationStyle1;
+            animation-duration: 300ms * $i;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+        }
+    }
+}
+@keyframes animationStyle1 {
+    0% {
+        opacity: 0;
+        transform: rotateY(-90deg) translate3d(0, 30px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(0deg) translate3d(0, 0, 0);
+    }
+}
 </style>
