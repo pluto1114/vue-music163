@@ -42,7 +42,7 @@ export default {
 <style scoped>
 .lyric{
 
-	height:8em;
+	height:10em;
 	overflow-x:hidden; 
 	overflow-y: scroll;
 }

@@ -1,7 +1,7 @@
 <template>
 	<transition name="slide-fade">
-	<div class="song">	
-		<div  v-if="song" class="card ">
+	<div class="song f1 container-flex box-ver">	
+		<div  v-if="song" class="card f1">
 			<div class="song-pic" :class="{rotating:playing}" :style="{backgroundImage:'url('+song.album.picUrl+')'}">
 			</div>
 		
@@ -117,9 +117,9 @@ export default {
 }
 .my-controls{
   width: 95%;
-  position: fixed;
+  position: absolute;
   left: 0;
-  bottom: -1em;
+  bottom: 0.5em;
   padding:0 .8em;
 }
 

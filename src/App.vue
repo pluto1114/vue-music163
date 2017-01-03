@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="">
+  <div id="app" class="container-flex box-ver">
     
     <welcome @afterLeave="toSongs"></welcome>
  
@@ -86,6 +86,9 @@ export default {
 a{
   text-decoration:none; 
 }
+.mint-cell{
+  border-radius:0.4em;
+}
 .container-flex{
   display: -webkit-box !important;
   display: box !important;
@@ -96,8 +99,11 @@ a{
   position:relative;
   box-flex: 1;
   -webkit-box-flex: 1; 
+}
+.box-ver{
+  box-orient:vertical;
+  -webkit-box-orient:vertical;
   
-
 }
 .my-badges{
   margin:0.4em 0 0.8em 0;
@@ -110,13 +116,6 @@ a{
   min-width: 6em;
 }
 
-.my-controls{
-  width: 95%;
-  position: fixed;
-  left: 0;
-  bottom: 2.5em;
-  padding:0 .8em;
-}
 
 .slide-fade-enter-active {
   transition: all .5s ease;
