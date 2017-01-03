@@ -11,12 +11,12 @@
 			</div>
 				<!-- <div class="t-gra">所属专辑：<span class="t-blu">{{song.album.name}}</span></div> -->
 						
-				<div class="btn-controls container-flex">
-					<div class="btn-con" @click="handlePlay">
-		          		<i class="fa fa-2x" :class="played" style="color:#d5d7dd;"></i>
-		      		</div>
-		      		
-		      	</div>
+			<div class="btn-controls container-flex">
+				<div class="btn-con" @click="handlePlay">
+	          		<i class="fa fa-2x" :class="played" style="color:#d5d7dd;"></i>
+	      		</div>
+	      		
+	      	</div>
 	      	<Lyric :id="id"></Lyric>
 	      	<!-- <audio id="media" :src="song.mp3Url" controls></audio>  -->
 	      	<controls class="my-controls"></controls>
@@ -100,7 +100,7 @@ export default {
 	text-align: center;
 }
 .btn-con{
-	margin: 0.4em auto;
+	margin: 1em auto;
 	background-color: #2c3e50;
 	padding: 0.5em 0.8em;
 	border-radius: 50%;
