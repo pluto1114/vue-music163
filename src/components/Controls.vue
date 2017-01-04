@@ -103,7 +103,7 @@ export default {
       if(this.duration!=0){
         this.duration=media.duration;
       }
-      console.log(this.durationStr)
+      // console.log(this.durationStr)
       this.currentTime=media.currentTime;
       let curIndex=_.sortedIndex(this.lrcTimeArr, media.currentTime);
       if (this.lrcLastIndex == curIndex) {

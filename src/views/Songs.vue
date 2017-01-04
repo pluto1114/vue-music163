@@ -20,6 +20,7 @@ export default {
   },
   computed:mapState(['songs']),
   created () {
+    this.$store.commit("hideWelcome");
     this.$store.commit("changePlaying",false);
     this.fetchData()
   },
@@ -43,13 +44,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" rel="stylesheet/scss" scoped>
 .songs .mint-cell{
-  background-color: transparent;
+  
 }
 .error {
   color: red;
 }
 .animation-style-1 > .item {
-    @for $i from 1 through 15 {
+    @for $i from 1 through 10 {
         &:nth-child(#{$i}) {
             opacity: 0;
             animation-name: animationStyle1;

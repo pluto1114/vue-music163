@@ -49,7 +49,7 @@ export default {
   },
   created(){
   	Indicator.open('加载中...');
-
+	this.$store.commit("hideWelcome");
   	this.$store.commit("changeCanPlay",false);
   	this.$store.dispatch("FETCH_SONG",this.id).then(()=>{
 	    Indicator.close();
@@ -100,7 +100,7 @@ export default {
 	text-align: center;
 }
 .btn-con{
-	margin: 1em auto;
+	margin: 0.6em auto;
 	background-color: #2c3e50;
 	padding: 0.5em 0.8em;
 	border-radius: 50%;
@@ -119,7 +119,7 @@ export default {
   width: 95%;
   position: absolute;
   left: 0;
-  bottom: 0.5em;
+  bottom: 0.2em;
   padding:0 .8em;
 }
 

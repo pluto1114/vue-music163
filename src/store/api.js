@@ -12,7 +12,7 @@ export function fetchSongList (options) {
         'csrf_token': "",
         'type':1,
         'offset':0,
-        'limit':15,
+        'limit':10,
         'total':true
     };
 
