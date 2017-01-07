@@ -15,10 +15,10 @@
             </div>
             <div class="audioplayer-time audioplayer-time-duration">{{durationStr}}</div>
             <div class="audioplayer-volume">
-                <div class="audioplayer-volume-button" title="Volume"><a href="#">Volume</a></div>
+                <div class="audioplayer-volume-button" title="Volume"><a onclick="return false;">Volume</a></div>
                 <div class="audioplayer-volume-adjust">
-                    <div>
-                        <div style="height: 100%;"></div>
+                    <div id="volumeOuterBar" @click="changeVolume($event,1)">
+                        <div id="volumeBar" :style="{height: volume+'px'}"></div>
                     </div>
                 </div>
             </div>
@@ -43,6 +43,7 @@ export default {
       currentTime:0,
       duration:1,
       loadedPercent:0,
+      volume:100
     }
   },
   computed:{
@@ -141,6 +142,13 @@ export default {
       console.log(percent)
       media.currentTime=this.duration*percent;
     },
+    changeVolume(e,isOuter){
+      let y=e.pageY;
+      let totalWidth=document.getElementById("volumeOuterBar").offsetHeight;
+      let offset=this.getOffset(document.getElementById("volumeOuterBar"));
+      this.volume=Math.abs(y-(offset.top+totalWidth));
+      media.volume=this.volume/100;
+    },
     convertToTime(time){
       var min = Math.floor((time / 60) % 60);
       var sec = Math.floor(time % 60);
@@ -153,8 +161,20 @@ export default {
       }
       cTime = min + ':' + sec
       return cTime;
+    },
+    getOffset(Node, offset) {
+        if (!offset) {
+            offset = {};
+            offset.top = 0;
+            offset.left = 0;
+        }
+        if (Node == document.body) {//当该节点为body节点时，结束递归
+            return offset;
+        }
+        offset.top += Node.offsetTop;
+        offset.left += Node.offsetLeft;
+        return this.getOffset(Node.parentNode, offset);//向上累加offset里的值
     }
-
   }
 }
 </script>
