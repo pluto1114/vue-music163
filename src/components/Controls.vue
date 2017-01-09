@@ -81,17 +81,14 @@ export default {
     });
   	this.$root.$on('play',()=>{
       console.log("canplay",this.canPlay);		
-      if (!this.canPlay) {
-        Toast("音乐加载失败，还是换一个试试吧");
-        this.$store.commit("changePlaying",false);
-      }else{
+      
         this.show=true;
         this.$store.commit("changePlaying",true);
         setTimeout(()=>{
           console.log("duration", media.duration)
           media.play();
         },1);
-  		}
+  		
   	});
    
   	this.$root.$on('pause',()=>{
