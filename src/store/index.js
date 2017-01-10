@@ -11,7 +11,6 @@ const store = new Vuex.Store({
         song: null,
         lyricArr: [],
         lrcTimeArr: [],
-        canPlay:false,
         lrcMarginTop:0,
         playing:false
     },
@@ -66,9 +65,6 @@ const store = new Vuex.Store({
             let arr = payload.lyric.split('\n');
             state.lyricArr = convertLrcArr(arr);
             state.lrcTimeArr=_.map(state.lyricArr,'time');
-        },
-        changeCanPlay(state,canPlay){
-            state.canPlay=canPlay;
         },
         changePlaying(state,isPlaying){
             state.playing=isPlaying;

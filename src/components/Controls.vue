@@ -3,7 +3,7 @@
 	<div v-show="show" class="controls">
 	     <!-- <audio id="media" :src="song.mp3Url" @timeupdate="handleTimeUpdate" @canplay="handleCanPlay" controls></audio> -->
        <div class="audioplayer">
-            <audio id="media" :src="song.mp3Url" style="width: 0px; height: 0px; visibility: hidden;" @timeupdate="handleTimeUpdate" @canplay="handleCanPlay">
+            <audio id="media" :src="song.mp3Url" style="width: 0px; height: 0px; visibility: hidden;" @timeupdate="handleTimeUpdate">
                 <!-- <source :src="song.mp3Url"> -->
             </audio>
             <div class="audioplayer-playpause" title="Play" @click=""><a href="#">Play</a></div>
@@ -49,7 +49,6 @@ export default {
   computed:{
     ...mapState({
       song:state=>state.song || {mp3Url:''},
-      canPlay:state=>state.canPlay,
       lyricArr:state=>state.lyricArr,
       lrcTimeArr:state=>state.lrcTimeArr
     }),
@@ -64,7 +63,7 @@ export default {
     }
   },
   created(){
-    this.$store.commit("changeCanPlay",false);
+    
   },
   mounted(){
     media=document.getElementById("media");
@@ -80,14 +79,14 @@ export default {
       this.$store.commit("changePlaying",false);
     });
   	this.$root.$on('play',()=>{
-      console.log("canplay",this.canPlay);		
+	
       
-        this.show=true;
-        this.$store.commit("changePlaying",true);
-        setTimeout(()=>{
-          console.log("duration", media.duration)
-          media.play();
-        },1);
+      this.show=true;
+      this.$store.commit("changePlaying",true);
+      setTimeout(()=>{
+        console.log("duration", media.duration)
+        media.play();
+      },1);
   		
   	});
    
@@ -113,10 +112,7 @@ export default {
       this.disappear();
       this.lrcLastIndex = curIndex;
     },
-    handleCanPlay(){ 
-        
-      this.$store.commit("changeCanPlay",true);
-    },
+
     color() {
         for (var i = 0; i < this.lyricArr.length; i++) {
             this.lyricArr[i].selected = false;
