@@ -9,7 +9,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "ladash": "^1.2.0",
+    "lodash": "^4.17.4",
     "mint-ui": "^2.0.4",
     "v-tap": "^2.0.2",
     "vue": "^2.0.1",
