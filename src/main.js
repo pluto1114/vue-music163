@@ -19,7 +19,8 @@ const router = new VueRouter({
   routes: [
     { path: '/' },
     { path: '/songs/:word', component: require('./views/Songs') },
-    { path: '/song/:id', component:require('./views/Song') },   
+    { path: '/song/:id', component:require('./views/Song') }, 
+    { path: '*', redirect: '/' }  
   ]
 })
 
