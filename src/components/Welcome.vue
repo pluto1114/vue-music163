@@ -2,7 +2,7 @@
   <transition name="slide-up" v-on:after-leave="afterLeave">
   <div v-show="show" class="welcome neonText">
     <h1>{{ msg }}</h1>
-    <h2>网易云音乐</h2>
+    <h2>Music163</h2>
   </div>
   </transition>
 </template>
@@ -17,7 +17,7 @@ export default {
   },
   data () {
     return {
-      msg: '拥抱Vue，享受生活'
+      msg: 'Embrace Vue,enjoy life'
     }
   },
   methods:{

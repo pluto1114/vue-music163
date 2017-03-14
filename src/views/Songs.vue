@@ -3,7 +3,7 @@
   	
   	<!-- <transition-group name="slide-fade"> -->
   	<mt-cell v-if="show" class="item" :title="x.name" :label="x.artists[0].name" is-link :to="'/song/'+x.id" v-for="x of songs" :key="x.id">
-  		<span>专辑《{{x.album.name}}》</span>
+  		<span>Album《{{x.album.name}}》</span>
   	</mt-cell>
     
 	<!-- </transition-group> -->
