@@ -3,7 +3,7 @@
   	
   	<!-- <transition-group name="slide-fade"> -->
   	<mt-cell v-if="show" class="item" :title="x.name" :label="x.artists[0].name" is-link :to="'/song/'+x.id" v-for="x of songs" :key="x.id">
-  		<span>Album《{{x.album.name}}》</span>
+  		<span class="descp">Album {{x.album.name}}</span>
   	</mt-cell>
     
 	<!-- </transition-group> -->
@@ -45,6 +45,10 @@ export default {
 <style lang="scss" rel="stylesheet/scss" scoped>
 .songs .mint-cell{
   
+}
+.descp{
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  max-width:10em;
 }
 .error {
   color: red;
