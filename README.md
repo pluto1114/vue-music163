@@ -18,6 +18,8 @@
 * Appcan
 * Apicloud
 
+## Other link
+- vue-music-qq : https://github.com/pluto1114/vue-music-qq
 
 ## Build Setup
 
