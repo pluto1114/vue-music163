@@ -39,7 +39,7 @@ npm run build
 ![image](http://60.205.178.25/static/qrcode.png)
 
 
-## app截图
+## Screenshots
 ![image](https://github.com/pluto1114/vue-music163/blob/master/screenshots/music163-01.png)
 
 ![image](https://github.com/pluto1114/vue-music163/blob/master/screenshots/music163-02.png)
