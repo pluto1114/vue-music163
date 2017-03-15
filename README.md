@@ -40,11 +40,11 @@ npm run build
 
 
 ## app截图
-![image](http://7xiakq.com1.z0.glb.clouddn.com/vue-music163/images/show01.png)
+![image](https://github.com/pluto1114/vue-music163/blob/master/screenshots/music163-01.png)
 
-![image](http://7xiakq.com1.z0.glb.clouddn.com/vue-music163/images/show02.png)
+![image](https://github.com/pluto1114/vue-music163/blob/master/screenshots/music163-02.png)
 
-![image](http://7xiakq.com1.z0.glb.clouddn.com/vue-music163/images/show03.png)
+![image](https://github.com/pluto1114/vue-music163/blob/master/screenshots/music163-03.png)
 
 # Conatct
 
