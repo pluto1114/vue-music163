@@ -28,6 +28,7 @@ export function fetchSongList (options) {
 }
 export function fetchSong (music_id) {
 	var p=Vue.http.get("/api/song/detail?id="+music_id+"&ids="+'%5B'+music_id+'%5D');
+    console.log('url',"http://music.163.com/api/song/detail?id="+music_id+"&ids="+'%5B'+music_id+'%5D')
     p.then(resp=>{
       console.log(resp.data);
     },resp=>{

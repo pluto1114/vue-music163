@@ -36,9 +36,8 @@ npm run build
 
 ## Demo site(aliyun)
 
-# http://60.205.178.25/
+# http://47.94.146.181:8000/music163
 
-![image](http://60.205.178.25/static/qrcode.png)
 
 
 ## Screenshots

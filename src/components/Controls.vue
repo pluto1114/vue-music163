@@ -66,6 +66,7 @@ export default {
     
   },
   mounted(){
+    console.log('song',this.song)
     media=document.getElementById("media");
     media.addEventListener("loadeddata",(e)=>{
       var interval = setInterval(()=>{
@@ -86,7 +87,7 @@ export default {
       setTimeout(()=>{
         console.log("duration", media.duration)
         media.play();
-      },1);
+      },10);
   		
   	});
    
