@@ -1,29 +1,30 @@
 <template>
   <div id="app" class="container-flex box-ver">
-    
+
     <welcome @afterLeave="toSongs"></welcome>
- 
-    <div class="container-flex">
-      <div class="f1">
-        <mt-field v-model="value" placeholder="input song's name or singer's name"></mt-field>
+    <form id="form-app" @submit.prevent="handleSearch()">
+      <div class="container-flex">
+        <div class="f1">
+          <mt-field v-model="value" placeholder="input song's name or singer's name"></mt-field>
+        </div>
+        <div style="margin-left:20px;" v-tap="{methods:handleSearch}">
+            <mt-button type="primary">Search</mt-button>
+        </div>
       </div>
-      <div style="margin-left:20px;" v-tap="{methods:handleSearch}">
-          <mt-button type="primary">Search</mt-button>
+      <div class="my-badges">
+        <transition-group name="list">
+          <mt-badge type="primary" size="large" v-for="word of searchWordArr" :key="word">
+            <span @click="handleWord(word)">{{word}}</span>
+          </mt-badge>
+        </transition-group>
       </div>
-    </div>   
-    <div class="my-badges">
-      <transition-group name="list">
-        <mt-badge type="primary" size="large" v-for="word of searchWordArr" :key="word">
-          <span @click="handleWord(word)">{{word}}</span>
-        </mt-badge>
-      </transition-group>
-    </div>
+    </form
     <router-view class="view"></router-view>
     <!-- <controls class="my-controls"></controls> -->
-    
 
 
-    
+
+
   </div>
 </template>
 
@@ -39,7 +40,7 @@ export default {
       searchWordArr:this.$store.state.searchWordArr
     }
   },
-  
+
   components: {
     Welcome
   },
@@ -78,10 +79,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  
+
 }
 a{
-  text-decoration:none; 
+  text-decoration:none;
 }
 .mint-cell{
   border-radius:0.4em;
@@ -90,17 +91,17 @@ a{
   display: -webkit-box !important;
   display: box !important;
   position:relative;
-  margin: 2px 4px;  
+  margin: 2px 4px;
 }
 .f1{
   position:relative;
   box-flex: 1;
-  -webkit-box-flex: 1; 
+  -webkit-box-flex: 1;
 }
 .box-ver{
   box-orient:vertical;
   -webkit-box-orient:vertical;
-  
+
 }
 .my-badges{
   margin:0.4em 0 0.8em 0;
@@ -144,7 +145,7 @@ a{
         margin:0 auto;
     }
     .my-controls{
-        
+
     }
 }
 </style>
