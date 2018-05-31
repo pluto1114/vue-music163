@@ -18,7 +18,7 @@
           </mt-badge>
         </transition-group>
       </div>
-    </form
+    </form>
     <router-view class="view"></router-view>
     <!-- <controls class="my-controls"></controls> -->
 
@@ -65,6 +65,7 @@ export default {
       if (this.value=='') {
         return;
       }
+      console.log("run toSongs")
       this.$router.push({ path: '/songs/'+this.value});
       this.$store.commit("addSearchWord",{value:this.value});
     }

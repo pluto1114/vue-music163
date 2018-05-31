@@ -29,6 +29,7 @@ export default {
   },
   methods:{
   	fetchData(){
+      console.log('fetchData')
   	  Indicator.open('加载中...');
 		  let word=this.$route.params.word || '汪峰';
 	  	console.log(word)
@@ -42,7 +43,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" rel="stylesheet/scss" scoped>
+<style lang="less" rel="stylesheet/scss" scoped>
 .songs .mint-cell{
   
 }
@@ -53,17 +54,22 @@ export default {
 .error {
   color: red;
 }
-.animation-style-1 > .item {
-    @for $i from 1 through 10 {
-        &:nth-child(#{$i}) {
-            opacity: 0;
-            animation-name: animationStyle1;
-            animation-duration: 300ms * $i;
-            animation-timing-function: ease-in-out;
-            animation-fill-mode: forwards;
-        }
-    }
+.item {
+    opacity: 0;
+    animation-name: animationStyle1;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    cursor: pointer;
 }
+
+.shown-loop(@n, @i: 1) when (@i <=@n) {
+    .my-item:nth-child(@{i}) {
+        animation-duration: @i*200ms;
+    }
+    .shown-loop(@n, (@i + 1));
+}
+
+.shown-loop(14);
 @keyframes animationStyle1 {
     0% {
         opacity: 0;
