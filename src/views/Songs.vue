@@ -63,7 +63,7 @@ export default {
 }
 
 .shown-loop(@n, @i: 1) when (@i <=@n) {
-    .my-item:nth-child(@{i}) {
+    .item:nth-child(@{i}) {
         animation-duration: @i*200ms;
     }
     .shown-loop(@n, (@i + 1));
