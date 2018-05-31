@@ -18,7 +18,7 @@ export function fetchSongList (options) {
 
     var postData = Object.assign(options, otherParams);
     console.log(postData);
-    var p=Vue.http.post("/api/search/get/web",postData);
+    var p=Vue.http.post("/api163/search/get/web",postData);
     p.then(resp => {
         console.log(resp.data);
     }, resp => {
@@ -27,7 +27,7 @@ export function fetchSongList (options) {
 	return p;
 }
 export function fetchSong (music_id) {
-	var p=Vue.http.get("/api/song/detail?id="+music_id+"&ids="+'%5B'+music_id+'%5D');
+	var p=Vue.http.get("/api163/song/detail?id="+music_id+"&ids="+'%5B'+music_id+'%5D');
     console.log('url',"http://music.163.com/api/song/detail?id="+music_id+"&ids="+'%5B'+music_id+'%5D')
     p.then(resp=>{
       console.log(resp.data);
@@ -37,7 +37,7 @@ export function fetchSong (music_id) {
     return p;
 }
 export function fetchLyric (music_id) {
-	var p=Vue.http.get("/api/song/lyric?os=pc&id="+music_id+'&lv=-1&kv=-1&tv=-1');
+	var p=Vue.http.get("/api163/song/lyric?os=pc&id="+music_id+'&lv=-1&kv=-1&tv=-1');
     p.then(resp=>{
       console.log(resp.data);
     },resp=>{

@@ -29,11 +29,11 @@ module.exports = {
     // just be aware of this issue when enabling this option.
     cssSourceMap: false,
     proxyTable: {
-        '/api':{
+        '/api163':{
             target:'http://music.163.com/api',
             changeOrigin:true,
             pathRewrite:{
-                '^/api':''
+                '^/api163':''
             },
             // headers:{
             //     'Referer': 'http://music.163.com/search/'
