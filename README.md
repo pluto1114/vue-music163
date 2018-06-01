@@ -36,7 +36,7 @@ npm run build
 
 ## Demo site(aliyun)
 
-# http://47.94.146.181:8000/music163
+# http://weixin.nmict.cn/vue-music163/
 
 
 
