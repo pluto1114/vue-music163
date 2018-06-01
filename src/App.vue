@@ -89,19 +89,17 @@ a{
   border-radius:0.4em;
 }
 .container-flex{
-  display: -webkit-box !important;
-  display: box !important;
-  position:relative;
+  display: flex;
+  /* position:relative; */
   margin: 2px 4px;
 }
 .f1{
   position:relative;
-  box-flex: 1;
-  -webkit-box-flex: 1;
+  flex: 1;
+  
 }
 .box-ver{
-  box-orient:vertical;
-  -webkit-box-orient:vertical;
+  flex-direction:column;
 
 }
 .my-badges{
