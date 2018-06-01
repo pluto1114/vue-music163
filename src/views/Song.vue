@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import '../assets/css/font-awesome.min.css';
 import { Indicator } from 'mint-ui';
 import Lyric from '../components/Lyric';
 import Controls from '../components/Controls';
