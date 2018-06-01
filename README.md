@@ -34,7 +34,7 @@ npm run dev
 npm run build
 ```
 
-## Demo site(aliyun)
+## Demo site
 
 # http://weixin.nmict.cn/vue-music163/
 
